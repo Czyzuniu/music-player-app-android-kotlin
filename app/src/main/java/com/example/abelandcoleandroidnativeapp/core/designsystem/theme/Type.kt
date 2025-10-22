@@ -33,17 +33,17 @@ object AppTextStyles {
     val TitleSeven = TextStyle(fontFamily = ApplesAndCarrots, fontSize = TextSizes.XS)
 
     val BodyText = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.MS)
-    val BodyTextBold = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.MS)
+    val BodyTextBold = TextStyle(fontFamily = StagFontRegularBold, fontSize = TextSizes.MS)
     val SmallText = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.S)
-    val SmallTextBold = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.S)
+    val SmallTextBold = TextStyle(fontFamily = StagFontRegularBold, fontSize = TextSizes.S)
     val VerySmallText = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.XS)
-    val VerySmallTextBold = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.XS)
+    val VerySmallTextBold = TextStyle(fontFamily = StagFontRegularBold, fontSize = TextSizes.XS)
     val LargeText = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.M)
-    val LargeTextBold = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.M)
+    val LargeTextBold = TextStyle(fontFamily = StagFontRegularBold, fontSize = TextSizes.M)
     val VeryLargeText = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.ML)
-    val VeryLargeTextBold = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.ML)
+    val VeryLargeTextBold = TextStyle(fontFamily = StagFontRegularBold, fontSize = TextSizes.ML)
     val ExtraLargeText = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.L)
-    val ExtraLargeTextBold = TextStyle(fontFamily = StagFontRegular, fontSize = TextSizes.L)
+    val ExtraLargeTextBold = TextStyle(fontFamily = StagFontRegularBold, fontSize = TextSizes.L)
 
 }
 

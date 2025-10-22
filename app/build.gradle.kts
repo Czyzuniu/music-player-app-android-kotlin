@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,39 @@ plugins {
 }
 
 android {
+    flavorDimensions += "environment"
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            applyEnvToBuildConfig("dev").forEach { key, value ->
+                buildConfigField("String", key.toString(), "\"$value\"")
+            }
+        }
+
+        create("qa") {
+            dimension = "environment"
+            applicationIdSuffix = ".qa"
+            versionNameSuffix = "-qa"
+            applyEnvToBuildConfig("qa").forEach { key, value ->
+                buildConfigField("String", key.toString(), "\"$value\"")
+            }
+        }
+
+        create("prod") {
+            dimension = "environment"
+            applyEnvToBuildConfig("dev").forEach { key, value ->
+                buildConfigField("String", key.toString(), "\"$value\"")
+            }
+        }
+    }
+
     namespace = "com.example.abelandcoleandroidnativeapp"
     compileSdk {
         version = release(36)
@@ -59,4 +94,10 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+fun applyEnvToBuildConfig(env: String): Properties {
+    val props = Properties()
+    val file = rootProject.file(".env.$env")
+    if (file.exists()) file.inputStream().use { props.load(it) }
+    return props
 }
