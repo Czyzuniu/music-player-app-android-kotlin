@@ -1,0 +1,359 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ACNotificationAPI V3",
+    "description": "An API for registering customer devices for notifications",
+    "version": "v3"
+  },
+  "servers": [{
+    "url": "https://apigw-test.abelandcole.co.uk/notification/v3"
+  }],
+  "paths": {
+    "/check/up": {
+      "get": {
+        "tags": ["HealthCheck"],
+        "summary": "Health check for Registration and Delivery services",
+        "description": "Health check for Registration and Delivery services",
+        "operationId": "GetCheckUp3",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }],
+                  "result": {}
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }],
+                  "result": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }],
+                  "result": {}
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }],
+                  "result": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registration/customer": {
+      "post": {
+        "tags": ["Registration"],
+        "summary": "Registers a device with the notification hub",
+        "description": "Registers a device with the notification hub",
+        "operationId": "Post3",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "handle": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterDeviceResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }],
+                  "result": {
+                    "platform": "string",
+                    "handle": "string",
+                    "tags": ["string"]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterDeviceResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }],
+                  "result": {
+                    "platform": "string",
+                    "handle": "string",
+                    "tags": ["string"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registration": {
+      "delete": {
+        "tags": ["Registration"],
+        "summary": "Deletes a registration from the notification hub",
+        "description": "Deletes a registration from the notification hub",
+        "operationId": "Delete3",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "handle": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "success": true,
+                  "errors": [{
+                    "errorCode": {},
+                    "errorCodeName": "string",
+                    "errorMessage": "string",
+                    "errorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "$ref": "#/components/schemas/Enum"
+          },
+          "errorCodeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorObject": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceRegistration": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string",
+            "description": "Platform of the device registration",
+            "nullable": true
+          },
+          "handle": {
+            "type": "string",
+            "description": "Handle of the device",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags applied to the device registration",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of a device registration"
+      },
+      "Enum": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealthCheckResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          },
+          "result": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterDeviceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/DeviceRegistration"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response to return ACNotifications.Core.Entities.DeviceRegistration"
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }, {
+    "apiKeyQuery": []
+  }],
+  "tags": [{
+    "name": "Registration",
+    "description": "A controller to allow registration of devices to the Notifications Hub"
+  }]
+}

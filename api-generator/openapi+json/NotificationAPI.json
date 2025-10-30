@@ -1,0 +1,103 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ACDeviceRegistrationAPITest nh=Endpoint=sb://acnotificationstest.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=rEdOqnFxcF3MlHx+PXff3aL33CC6heutcFOaaOrFqwM= db= DefaultEndpointsProtocol=https;AccountName=ac-notificationsapi-cosmosdb-test;AccountKey=WdRVIwV4cMt7PZ86i3GQgvrPmEMF0aE4yr1EL8wrVb03Pw8X2XBBwYLAz0DAxDGFpYV772R6oADAPFegZ3aIOg==;TableEndpoint=https://ac-notificationsapi-cosmosdb-test.table.cosmos.azure.com:443/;",
+    "description": "A web API for sending notifications with A&C",
+    "termsOfService": "https://www.abelandcole.co.uk",
+    "contact": {
+      "name": "Systems Team",
+      "url": "https://www.abelandcole.co.uk",
+      "email": "development@abelandcole.co.uk"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/ping": {
+      "get": {
+        "tags": [
+          "Registration"
+        ],
+        "summary": "Health check to test if the web service is available.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registrations": {
+      "post": {
+        "tags": [
+          "Registration"
+        ],
+        "summary": "Registers a device with the notification hub",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "handle": {
+                    "type": "string",
+                    "description": "",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "handle": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Registration"
+        ],
+        "summary": "Registers a device with the notification hub",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "handle": {
+                    "type": "string",
+                    "description": "",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "handle": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": { }
+}

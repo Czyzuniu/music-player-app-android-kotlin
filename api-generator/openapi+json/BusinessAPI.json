@@ -1,0 +1,284 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Business API",
+    "description": "Business API",
+    "contact": {
+      "name": "Systems Team",
+      "url": "https://www.abelandcole.co.uk",
+      "email": "development@abelandcole.co.uk"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://abelandcole.azure-api.net/business/v1"
+    }
+  ],
+  "paths": {
+    "/appactive": {
+      "get": {
+        "tags": [
+          "AppActive"
+        ],
+        "summary": "Get app status",
+        "operationId": "getAppActive",
+        "responses": {
+          "200": {
+            "description": "App Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appversion": {
+      "get": {
+        "tags": [
+          "AppVersion"
+        ],
+        "summary": "Get app version",
+        "operationId": "getAppVersion",
+        "responses": {
+          "200": {
+            "description": "App version",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppVersion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ordersettings/maxproducts": {
+      "get": {
+        "tags": [
+          "OrderSettings"
+        ],
+        "summary": "Get the Maximum quantity allowed for a product",
+        "operationId": "getOrderSettingsMaxProducts",
+        "responses": {
+          "200": {
+            "description": "Maximum Product Quantity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderSettingsMaxProducts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/theme": {
+      "get": {
+        "tags": [
+          "Theme"
+        ],
+        "summary": "Get app theme",
+        "operationId": "getAppTheme",
+        "responses": {
+          "200": {
+            "description": "Theme",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openingtimes": {
+      "get": {
+        "tags": [
+          "OpeningTimes"
+        ],
+        "summary": "Get opening times",
+        "operationId": "getOpeningTimes",
+        "responses": {
+          "200": {
+            "description": "Opening Times",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpeningTimes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openingtimes/short": {
+      "get": {
+        "tags": [
+          "OpeningTimes"
+        ],
+        "summary": "OpeningTimes-Short",
+        "description": "Returns the short version of the business opening times.",
+        "operationId": "openingtimes-short",
+        "responses": {
+          "200": {
+            "description": "Opening Times",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpeningTimesShort"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/headerbar": {
+      "get": {
+        "tags": [
+          "ContentHeaderBar"
+        ],
+        "summary": "Content-HeaderBar",
+        "operationId": "content-headerbar",
+        "description": "Returns the content URL for the offer bar in the header.",
+        "responses": {
+          "200": {
+            "description": "Content Header Bar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentHeaderBar"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/showall/new": {
+      "get": {
+        "tags": [
+          "ShowAll"
+        ],
+        "summary": "Get the MenuItemId For the New MenuItem",
+        "operationId": "getShowAllNew",
+        "responses": {
+          "200": {
+            "description": "Menu Item Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowAllNew"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AppStatus": {
+        "type": "object",
+        "properties": {
+          "Active": {
+            "type": "string",
+            "example": "true"
+          },
+          "Message": {
+            "type": "string",
+            "example": "The App is currently unavailable"
+          }
+        }
+      },
+      "AppVersion": {
+        "type": "object",
+        "properties": {
+          "Platforms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Platform": {
+                  "type": "string"
+                },
+                "Versions": {
+                  "type": "object",
+                  "properties": {
+                    "CurrentVersion": {
+                      "type": "string"
+                    },
+                    "NudgeVersion": {
+                      "type": "string"
+                    },
+                    "MinVersion": {
+                      "type": "string"
+                    },
+                    "BetaVersion": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "OrderSettingsMaxProducts": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "Theme": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "example": "christmas"
+          }
+        }
+      },
+      "OpeningTimes": {
+        "type": "object",
+        "properties": {
+          "Message": {
+            "type": "string",
+            "example": "We're available Mon-Fri from 9am to 5pm (bank holiday times may vary)"
+          }
+        }
+      },
+      "OpeningTimesShort": {
+        "type": "object",
+        "properties": {
+          "Message": {
+            "type": "string",
+            "example": "MON to FRI: 9 AM - 5 PM"
+          }
+        }
+      },
+      "ContentHeaderBar": {
+        "type": "object",
+        "properties": {
+          "Message": {
+            "type": "string",
+            "example": "HeaderBanners/HeaderBanner.htm"
+          }
+        }
+      },
+      "ShowAllNew": {
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}

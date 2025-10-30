@@ -1,0 +1,2161 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ACPersonalisationAPI V2",
+    "description": "A web API to personalise products and contents from A&C",
+    "version": "v2"
+  },
+  "servers": [{
+    "url": "https://apigw-test.abelandcole.co.uk/personalisation/v2"
+  }],
+  "paths": {
+    "/check/up": {
+      "get": {
+        "tags": ["HealthCheck"],
+        "summary": "Checks that dependant services are healthy",
+        "description": "Checks that dependant services are healthy",
+        "operationId": "GetCheckUp",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/content/{contentId}": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns generic content info for specified content id.",
+        "description": "# Sample Request:\r\nGET /content/971",
+        "operationId": "GetContentV2",
+        "parameters": [{
+          "name": "contentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the content details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Content"
+                },
+                "example": {
+                  "ContentId": 0,
+                  "ContentName": "string",
+                  "ContentDesc": "string",
+                  "ContentType": 0,
+                  "ContentTypeName": "string",
+                  "ContentImageName": "string",
+                  "CountryOfOrigin": "string",
+                  "VarietyName": "string",
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content with this content id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/customer/contents": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product contents.",
+        "description": "# Sample Request:\r\nGET /product/6047/customer/130587/contents?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- OriginalContent - returns original content name, image and other details\r\n- CurrentContent - returns current content name, image and other details\r\n- Alternatives - returns collection of alternative contents which could replace this content\r\n- Alternatives.Content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContentsV2",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductContent"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "OriginalContentId": 0,
+                  "CurrentContentId": 0,
+                  "NeverSend": true,
+                  "CurrentContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "OriginalContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Alternatives": [{
+                    "ContentId": 0,
+                    "ExtraPortion": true,
+                    "NeverSend": true,
+                    "Content": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/contents": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product contents for anonymous customers",
+        "description": "# Sample Request:\r\nGET /product/6047/contents?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- OriginalContent - returns original content name, image and other details\r\n- CurrentContent - returns current content name, image and other details\r\n- Alternatives - returns collection of alternative contents which could replace this content\r\n- Alternatives.Content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContentsAnonymous",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductContent"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "OriginalContentId": 0,
+                  "CurrentContentId": 0,
+                  "NeverSend": true,
+                  "CurrentContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "OriginalContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Alternatives": [{
+                    "ContentId": 0,
+                    "ExtraPortion": true,
+                    "NeverSend": true,
+                    "Content": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/customer/content/{originalContentId}": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product content object for specific original content id.",
+        "description": "# Sample Request:\r\nGET /product/6047/customer/130587/content/971?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContentV2",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the content of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductContent"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "OriginalContentId": 0,
+                  "CurrentContentId": 0,
+                  "NeverSend": true,
+                  "CurrentContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "OriginalContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Alternatives": [{
+                    "ContentId": 0,
+                    "ExtraPortion": true,
+                    "NeverSend": true,
+                    "Content": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "This content for this product id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["ProductContent"],
+        "summary": "Updates product content to specified alternative content.",
+        "description": "# Sample Request:\r\nPUT /product/6047/customer/130587/content/971?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date this is not yet past cutoff is used.",
+        "operationId": "PutContentV2",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updates the curent content of the product"
+          },
+          "404": {
+            "description": "Matching content for this product was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/content/{originalContentId}": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product content object for specific original content id for anonymous customers",
+        "description": "# Sample Request:\r\nGET /product/6047/content/971?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContentAnonymous",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the content of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductContent"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "OriginalContentId": 0,
+                  "CurrentContentId": 0,
+                  "NeverSend": true,
+                  "CurrentContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "OriginalContent": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Alternatives": [{
+                    "ContentId": 0,
+                    "ExtraPortion": true,
+                    "NeverSend": true,
+                    "Content": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "This content for this product id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/customer/content/{originalContentId}/alternatives": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns alternative contents for specified product content.",
+        "description": "# Sample Request:\r\nGET /product/6047/customer/130587/content/971/alternatives?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetAlternativesV2",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlternativeContent"
+                  }
+                },
+                "example": [{
+                  "ContentId": 0,
+                  "ExtraPortion": true,
+                  "NeverSend": true,
+                  "Content": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/content/{originalContentId}/alternatives": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns alternative contents for specified product content for anonymous customers",
+        "description": "# Sample Request:\r\nGET /product/6047/content/971/alternatives?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetAlternativesAnonymous",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlternativeContent"
+                  }
+                },
+                "example": [{
+                  "ContentId": 0,
+                  "ExtraPortion": true,
+                  "NeverSend": true,
+                  "Content": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recommendation/{recommendationType}/customer": {
+      "get": {
+        "tags": ["Recommendation"],
+        "summary": "Returns recommendations from the provider using the specified recommendation\r\n           type - only returning products available for customer's next delivery.",
+        "description": "# Sample Requests:\r\nGET /recommendation/home/customer/1234\r\nGET /recommendation/2/customer/1234?maxResults=10&productId=2468\r\n# Recommendation Types:\r\nYou can use the name or the id for the recommendation types which are:\r\n- Home(1) - aka Spotlight - returns top recommendations excluding products currently on order for specified customer\r\n- Product(2) - aka Also Try - returns top recommendations associated with specified product excluding any already on order for customer\r\n- Checkout(3) - aka Interrupt - returns recommendations as an interrupt on checkout for products relating to (but exluding) those on order\r\n- Deliveries(4) - aka Top Picks - returns recommendations statically displayed on My Deliveries for products relating to (but exluding) those on order",
+        "operationId": "GetRecommendationV2",
+        "parameters": [{
+          "name": "recommendationType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        }, {
+          "name": "productId",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the recommendation details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                },
+                "example": {
+                  "SearchTerm": "string",
+                  "SearchType": 1,
+                  "IsMatch": true,
+                  "SearchSuggestions": [{
+                    "SearchTerm": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "ProductSuggestions": [{
+                    "ProductId": 0
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Recommendation type specified was not valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No results could be found for this recommendation type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recommendation/{recommendationType}": {
+      "get": {
+        "tags": ["Recommendation"],
+        "summary": "Returns recommendations for anonymous customers from the provider using the specified recommendation\r\ntype - only returning products available for customer's next delivery.",
+        "description": "# Sample Requests:\r\nGET /recommendation/home\r\nGET /recommendation/2?maxResults=10&productId=2468\r\n# Recommendation Types:\r\nYou can use the name or the id for the recommendation types which are:\r\n- Home(1) - aka Spotlight - returns top recommendations excluding products currently on order for specified customer\r\n- Product(2) - aka Also Try - returns top recommendations associated with specified product excluding any already on order for customer\r\n- Checkout(3) - aka Interrupt - returns recommendations as an interrupt on checkout for products relating to (but exluding) those on order\r\n- Deliveries(4) - aka Top Picks - returns recommendations statically displayed on My Deliveries for products relating to (but exluding) those on order",
+        "operationId": "GetRecommendationAnonymous",
+        "parameters": [{
+          "name": "recommendationType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        }, {
+          "name": "productId",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the recommendation details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                },
+                "example": {
+                  "SearchTerm": "string",
+                  "SearchType": 1,
+                  "IsMatch": true,
+                  "SearchSuggestions": [{
+                    "SearchTerm": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "ProductSuggestions": [{
+                    "ProductId": 0
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Recommendation type specified was not valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No results could be found for this recommendation type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/{searchTerm}/customer": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Returns full search result using 'AutoCorrect'. If there are no results\r\n           and there is an alternative spelling to suggest it will automatically return results \r\n           for new spelling.",
+        "description": "# Sample Request:\r\nGET /search/beef/customer/1234?maxResults=4",
+        "operationId": "GetSearchV2",
+        "parameters": [{
+          "name": "searchTerm",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Search details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                },
+                "example": {
+                  "SearchTerm": "string",
+                  "SearchType": 1,
+                  "IsMatch": true,
+                  "SearchSuggestions": [{
+                    "SearchTerm": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "ProductSuggestions": [{
+                    "ProductId": 0
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Search for this type of search for this search term returned no matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/{searchTerm}": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Returns full search result using 'AutoCorrect' for anonymous customers. If there are no results\r\nand there is an alternative spelling to suggest it will automatically return results \r\nfor new spelling.",
+        "description": "# Sample Request:\r\nGET /search/beef/customer/1234?maxResults=4",
+        "operationId": "GetSearchAnonymous",
+        "parameters": [{
+          "name": "searchTerm",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Search details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                },
+                "example": {
+                  "SearchTerm": "string",
+                  "SearchType": 1,
+                  "IsMatch": true,
+                  "SearchSuggestions": [{
+                    "SearchTerm": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "ProductSuggestions": [{
+                    "ProductId": 0
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Search for this type of search for this search term returned no matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/{searchType}/{searchTerm}/customer": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Returns the search result from the search provider using the specified type of search.",
+        "description": "# Sample Request:\r\nGET /search/autoComplete/beef/customer/1234?maxResults=4\r\nYou can use the name or the id for the search types which are:\r\n- AutoComplete (1) - used as you type, returns likely searches and products for what you might be typing.\r\n- SpellCheck (2) - for full search, if there are no results it will suggest an alternative spelling without querying results for that suggestion.\r\n- AutoCorrect (3) - for full search, if there are no results it will look up results for alternative suggested spelling if available.",
+        "operationId": "GetSearchOfTypeV2",
+        "parameters": [{
+          "name": "searchTerm",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "searchType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Search details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                },
+                "example": {
+                  "SearchTerm": "string",
+                  "SearchType": 1,
+                  "IsMatch": true,
+                  "SearchSuggestions": [{
+                    "SearchTerm": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "ProductSuggestions": [{
+                    "ProductId": 0
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Search for this type of search for this search term returned no matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/{searchType}/{searchTerm}": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Returns the search result from the search provider using the specified type of search for anonymous customers.",
+        "description": "# Sample Request:\r\nGET /search/autoComplete/beef?maxResults=4\r\nYou can use the name or the id for the search types which are:\r\n- AutoComplete (1) - used as you type, returns likely searches and products for what you might be typing.\r\n- SpellCheck (2) - for full search, if there are no results it will suggest an alternative spelling without querying results for that suggestion.\r\n- AutoCorrect (3) - for full search, if there are no results it will look up results for alternative suggested spelling if available.",
+        "operationId": "GetSearchOfTypeAnonymous",
+        "parameters": [{
+          "name": "searchTerm",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "searchType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Search details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                },
+                "example": {
+                  "SearchTerm": "string",
+                  "SearchType": 1,
+                  "IsMatch": true,
+                  "SearchSuggestions": [{
+                    "SearchTerm": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "ProductSuggestions": [{
+                    "ProductId": 0
+                  }],
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Search for this type of search for this search term returned no matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes/customer": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get customer dislikes by customer Id",
+        "description": "Sample Request:\r\n<br>GET /dislikes/customer/169095",
+        "operationId": "GetCustomerDislikesByCustomerId",
+        "parameters": [{
+          "name": "showHidden",
+          "in": "query",
+          "description": "Show secret dislikes",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the CustomerDislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDislike"
+                  }
+                },
+                "example": [{
+                  "DislikeId": 0,
+                  "DateAdded": "string",
+                  "Hidden": true
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Customer Dislike not found (Customer and/or Dislike)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Dislikes"],
+        "summary": "Add a new Customer Dislike",
+        "description": "Sample Requests:\r\n<br>POST /dislikes/customer/169095<br>Body\r\n{\r\n    \"dislikeId\": 1\r\n}",
+        "operationId": "AddCustomerDislike",
+        "requestBody": {
+          "description": "New Customer Dislike ACPersonalisation.Core.Dislikes.Models.CustomerDislike",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the Dislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDislike"
+                },
+                "example": {
+                  "DislikeId": 0,
+                  "DateAdded": "string",
+                  "Hidden": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Dislike cannot be processed (Limit exceeded)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get all dislikes",
+        "description": "Sample Requests:\r\n<br>GET /dislikes?showHidden=true<br>GET /dislikes?showHidden=false<br>GET /dislikes",
+        "operationId": "GetDislikes",
+        "parameters": [{
+          "name": "showHidden",
+          "in": "query",
+          "description": "Show secret dislikes",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Dislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dislike"
+                  }
+                },
+                "example": [{
+                  "Id": 0,
+                  "Name": "string",
+                  "ContentTypeId": 0,
+                  "ContentType": "string",
+                  "ImageUrl": "string",
+                  "Hidden": true
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes/{dislikeId}": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get a Dislike by Dislike Id",
+        "description": "Sample Requests:\r\n<br>GET /dislikes/1",
+        "operationId": "GetDislikeByDislikeId",
+        "parameters": [{
+          "name": "dislikeId",
+          "in": "path",
+          "description": "Format - int32. The Id of the Dislike",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Dislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dislike"
+                },
+                "example": {
+                  "Id": 0,
+                  "Name": "string",
+                  "ContentTypeId": 0,
+                  "ContentType": "string",
+                  "ImageUrl": "string",
+                  "Hidden": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes/{dislikeId}/customer": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get a Dislike by Dislike Id",
+        "description": "Sample Requests:\r\n<br>GET /dislikes/1/customer/169095",
+        "operationId": "GetCustomerDislikeByDislikeId",
+        "parameters": [{
+          "name": "dislikeId",
+          "in": "path",
+          "description": "Format - int32. The Id of the Dislike",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Dislike",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDislike"
+                },
+                "example": {
+                  "DislikeId": 0,
+                  "DateAdded": "string",
+                  "Hidden": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Dislikes"],
+        "summary": "Delete a Customer Dislike",
+        "description": "Sample Requests:\r\n<br>DELETE /dislikes/1/customer/169095",
+        "operationId": "DeleteCustomerDislike",
+        "parameters": [{
+          "name": "dislikeId",
+          "in": "path",
+          "description": "Format - int32. Id of the Dislike",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AlternativeContent": {
+        "type": "object",
+        "properties": {
+          "ContentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ExtraPortion": {
+            "type": "boolean"
+          },
+          "NeverSend": {
+            "type": "boolean"
+          },
+          "Content": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Content": {
+        "type": "object",
+        "properties": {
+          "ContentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ContentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentType": {
+            "$ref": "#/components/schemas/ContentType"
+          },
+          "ContentTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ContentImageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "CountryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "VarietyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentType": {
+        "enum": [0, 1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CustomerDislike": {
+        "type": "object",
+        "properties": {
+          "DislikeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DateAdded": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Hidden": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dislike": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "Hidden": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "Href": {
+            "type": "string",
+            "nullable": true
+          },
+          "Rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewContent": {
+        "type": "object",
+        "properties": {
+          "NewContentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewCustomerDislike": {
+        "type": "object",
+        "properties": {
+          "DislikeId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "ProductContent": {
+        "type": "object",
+        "properties": {
+          "DeliveryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "OriginalContentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CurrentContentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "NeverSend": {
+            "type": "boolean"
+          },
+          "CurrentContent": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "OriginalContent": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "Alternatives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlternativeContent"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductSuggestion": {
+        "type": "object",
+        "properties": {
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchResult": {
+        "type": "object",
+        "properties": {
+          "SearchTerm": {
+            "type": "string",
+            "nullable": true
+          },
+          "SearchType": {
+            "$ref": "#/components/schemas/SearchType"
+          },
+          "IsMatch": {
+            "type": "boolean"
+          },
+          "SearchSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchSuggestion"
+            },
+            "nullable": true
+          },
+          "ProductSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductSuggestion"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchSuggestion": {
+        "type": "object",
+        "properties": {
+          "SearchTerm": {
+            "type": "string",
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchType": {
+        "enum": [1, 2, 3],
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }, {
+    "apiKeyQuery": []
+  }]
+}

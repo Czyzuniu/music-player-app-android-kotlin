@@ -1,0 +1,3162 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ACOrderAPI V2",
+    "description": "A web API for Ordering with A&C",
+    "version": "v2"
+  },
+  "servers": [{
+    "url": "https://apigw-test.abelandcole.co.uk/order/v2"
+  }],
+  "paths": {
+    "/check/up": {
+      "get": {
+        "tags": ["HealthCheck"],
+        "summary": "GetCheckUp",
+        "operationId": "GetCheckUp",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/customer/offerCodes": {
+      "get": {
+        "tags": ["OfferCode"],
+        "summary": "Returns all valid Offer Codes added to specified customer.",
+        "description": "Returns all valid Offer Codes added to specified customer.",
+        "operationId": "GetOfferCodes",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OfferCode"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OfferCode"
+                  }
+                },
+                "example": [{
+                  "OfferId": 0,
+                  "Code": "string",
+                  "Description": "string",
+                  "FriendlyURL": "string",
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "IsInProgress": true
+                }]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OfferCode"
+                  }
+                },
+                "example": [{
+                  "OfferId": 0,
+                  "Code": "string",
+                  "Description": "string",
+                  "FriendlyURL": "string",
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "IsInProgress": true
+                }]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["OfferCode"],
+        "summary": "Adds new offers for specified code onto customer account and returns \r\n                     offers added if successful.",
+        "description": "Adds new offers for specified code onto customer account and returns \r\n                     offers added if successful.",
+        "operationId": "PostOfferCode",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "string"
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "string"
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "string"
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "string"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a list of new added offers for code.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OfferCode"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OfferCode"
+                  }
+                },
+                "example": [{
+                  "OfferId": 0,
+                  "Code": "string",
+                  "Description": "string",
+                  "FriendlyURL": "string",
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "IsInProgress": true
+                }]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OfferCode"
+                  }
+                },
+                "example": [{
+                  "OfferId": 0,
+                  "Code": "string",
+                  "Description": "string",
+                  "FriendlyURL": "string",
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "IsInProgress": true
+                }]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInputResult"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInputResult"
+                },
+                "example": {
+                  "OfferCode": "string",
+                  "ResultCode": 0,
+                  "ResultName": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInputResult"
+                },
+                "example": {
+                  "OfferCode": "string",
+                  "ResultCode": 0,
+                  "ResultName": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Offer code not valid for customer, check response code.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInputResult"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInputResult"
+                },
+                "example": {
+                  "OfferCode": "string",
+                  "ResultCode": 0,
+                  "ResultName": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInputResult"
+                },
+                "example": {
+                  "OfferCode": "string",
+                  "ResultCode": 0,
+                  "ResultName": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/offerCodes/{offerCode}": {
+      "delete": {
+        "tags": ["OfferCode"],
+        "summary": "Deletes and offer code from a customer account",
+        "description": "Deletes and offer code from a customer account",
+        "operationId": "DeleteOfferCode",
+        "parameters": [{
+          "name": "offerCode",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns a list of new added offers for code."
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Offer code is in progress and cannot be deleted.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/orders": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns all Orders for specified customer.",
+        "description": "Returns all Orders for specified customer.",
+        "operationId": "GetOrders",
+        "parameters": [{
+          "name": "fromDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "toDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "showHidden",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "Items": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Offers": [{
+                    "OfferId": 0,
+                    "OfferMessage": "string",
+                    "OfferCode": "string",
+                    "OfferDesc": "string",
+                    "FriendlyURL": "string",
+                    "NumQualified": 0,
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "NeedMore": 0,
+                    "NumCategories": 0,
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "CreditAmount": 0,
+                    "DeliveriesQualifying": 0,
+                    "IsCodeInProgress": true,
+                    "DeliveriesToQualify": 0,
+                    "Categories": [{
+                      "OfferCategoryId": 0,
+                      "Value": 0,
+                      "Items": [{
+                        "OrderItemId": 0,
+                        "Confirmed": true
+                      }]
+                    }]
+                  }],
+                  "Credits": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "OrderStatus": 1,
+                  "OrderStatusName": "string",
+                  "CanOrder": true,
+                  "NumItems": 0,
+                  "OrderValue": 0,
+                  "OrderValueBeforeDiscounts": 0,
+                  "MinimumOrderValue": 0,
+                  "DeliveryCharge": 0,
+                  "OfferDiscounts": 0,
+                  "OtherCredits": 0,
+                  "TotalSavings": 0,
+                  "Payments": 0,
+                  "OrderTotal": 0,
+                  "TotalBeforeDiscounts": 0,
+                  "Confirmed": true,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "Items": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Offers": [{
+                    "OfferId": 0,
+                    "OfferMessage": "string",
+                    "OfferCode": "string",
+                    "OfferDesc": "string",
+                    "FriendlyURL": "string",
+                    "NumQualified": 0,
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "NeedMore": 0,
+                    "NumCategories": 0,
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "CreditAmount": 0,
+                    "DeliveriesQualifying": 0,
+                    "IsCodeInProgress": true,
+                    "DeliveriesToQualify": 0,
+                    "Categories": [{
+                      "OfferCategoryId": 0,
+                      "Value": 0,
+                      "Items": [{
+                        "OrderItemId": 0,
+                        "Confirmed": true
+                      }]
+                    }]
+                  }],
+                  "Credits": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "OrderStatus": 1,
+                  "OrderStatusName": "string",
+                  "CanOrder": true,
+                  "NumItems": 0,
+                  "OrderValue": 0,
+                  "OrderValueBeforeDiscounts": 0,
+                  "MinimumOrderValue": 0,
+                  "DeliveryCharge": 0,
+                  "OfferDiscounts": 0,
+                  "OtherCredits": 0,
+                  "TotalSavings": 0,
+                  "Payments": 0,
+                  "OrderTotal": 0,
+                  "TotalBeforeDiscounts": 0,
+                  "Confirmed": true,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Orders"],
+        "summary": "Deletes all orders for a customer.",
+        "description": "Deletes all orders for a customer.",
+        "operationId": "DeleteOrders",
+        "responses": {
+          "200": {
+            "description": "The item was deleted successfully."
+          },
+          "409": {
+            "description": "Orders could not be deleted due to order status.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns Order for specified customer and delivery date.",
+        "description": "Returns Order for specified customer and delivery date.",
+        "operationId": "GetOrder",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "showHidden",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Order.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Items": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Offers": [{
+                    "OfferId": 0,
+                    "OfferMessage": "string",
+                    "OfferCode": "string",
+                    "OfferDesc": "string",
+                    "FriendlyURL": "string",
+                    "NumQualified": 0,
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "NeedMore": 0,
+                    "NumCategories": 0,
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "CreditAmount": 0,
+                    "DeliveriesQualifying": 0,
+                    "IsCodeInProgress": true,
+                    "DeliveriesToQualify": 0,
+                    "Categories": [{
+                      "OfferCategoryId": 0,
+                      "Value": 0,
+                      "Items": [{
+                        "OrderItemId": 0,
+                        "Confirmed": true
+                      }]
+                    }]
+                  }],
+                  "Credits": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "OrderStatus": 1,
+                  "OrderStatusName": "string",
+                  "CanOrder": true,
+                  "NumItems": 0,
+                  "OrderValue": 0,
+                  "OrderValueBeforeDiscounts": 0,
+                  "MinimumOrderValue": 0,
+                  "DeliveryCharge": 0,
+                  "OfferDiscounts": 0,
+                  "OtherCredits": 0,
+                  "TotalSavings": 0,
+                  "Payments": 0,
+                  "OrderTotal": 0,
+                  "TotalBeforeDiscounts": 0,
+                  "Confirmed": true,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Items": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Offers": [{
+                    "OfferId": 0,
+                    "OfferMessage": "string",
+                    "OfferCode": "string",
+                    "OfferDesc": "string",
+                    "FriendlyURL": "string",
+                    "NumQualified": 0,
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "NeedMore": 0,
+                    "NumCategories": 0,
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "CreditAmount": 0,
+                    "DeliveriesQualifying": 0,
+                    "IsCodeInProgress": true,
+                    "DeliveriesToQualify": 0,
+                    "Categories": [{
+                      "OfferCategoryId": 0,
+                      "Value": 0,
+                      "Items": [{
+                        "OrderItemId": 0,
+                        "Confirmed": true
+                      }]
+                    }]
+                  }],
+                  "Credits": [{
+                    "DeliveryDate": "string",
+                    "Confirmed": true,
+                    "Id": 0,
+                    "ProductId": 0,
+                    "Quantity": 0,
+                    "Frequency": 0,
+                    "Price": 0,
+                    "Type": 1,
+                    "TypeName": "string",
+                    "ErrorCode": 0,
+                    "ErrorCodeName": "string",
+                    "RelatedProductId": 0,
+                    "RelatedQuantity": 0,
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "OrderStatus": 1,
+                  "OrderStatusName": "string",
+                  "CanOrder": true,
+                  "NumItems": 0,
+                  "OrderValue": 0,
+                  "OrderValueBeforeDiscounts": 0,
+                  "MinimumOrderValue": 0,
+                  "DeliveryCharge": 0,
+                  "OfferDiscounts": 0,
+                  "OtherCredits": 0,
+                  "TotalSavings": 0,
+                  "Payments": 0,
+                  "OrderTotal": 0,
+                  "TotalBeforeDiscounts": 0,
+                  "Confirmed": true,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order matching this CustomerId or Date could not be found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/orders/{deliveryDate}/items": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns OrderItems for specified customer and delivery date.",
+        "description": "Returns OrderItems for specified customer and delivery date.",
+        "operationId": "GetOrderItems",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }, {
+          "name": "showHidden",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the OrderItems.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderItem"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderItem"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderItem"
+                  }
+                },
+                "example": [{
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }]
+              }
+            }
+          },
+          "404": {
+            "description": "Order matching this CustomerId or Date could not be found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}/item/{id}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns specified OrderItem object.",
+        "description": "Returns specified OrderItem object.",
+        "operationId": "GetItem",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "id",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the item.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item matching this Id could not be found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Orders"],
+        "summary": "Updates values for specified OrderItem.",
+        "description": "Sample Request:\r\n\r\n    PUT\r\n    {\r\n        \"productId\": 254,\r\n        \"quantity\": 1,\r\n        \"frequency\": 0\r\n    }",
+        "operationId": "PutItem",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "id",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated item.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item matching this Id could not be found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Product was sold out, unavailable or past cutoff. Reason and available qty is returned.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "example": {
+                  "ErrorCode": 0,
+                  "ErrorName": "string",
+                  "Id": 0,
+                  "QuantityAvailable": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "example": {
+                  "ErrorCode": 0,
+                  "ErrorName": "string",
+                  "Id": 0,
+                  "QuantityAvailable": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Orders"],
+        "summary": "Deletes specified OrderItem.",
+        "description": "Deletes specified OrderItem.",
+        "operationId": "DeleteItem",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "id",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "The item was deleted successfully."
+          },
+          "404": {
+            "description": "Item matching this Id could not be found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}/offer/{offerId}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns Offer for specified customer and delivery date.",
+        "description": "Returns Offer for specified customer and delivery date.",
+        "operationId": "GetOrderOffer",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "offerId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Offer.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                },
+                "example": {
+                  "OfferId": 0,
+                  "OfferMessage": "string",
+                  "OfferCode": "string",
+                  "OfferDesc": "string",
+                  "FriendlyURL": "string",
+                  "NumQualified": 0,
+                  "QualificationType": 1,
+                  "QualificationTypeName": "string",
+                  "NeedMore": 0,
+                  "NumCategories": 0,
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "CreditAmount": 0,
+                  "DeliveriesQualifying": 0,
+                  "IsCodeInProgress": true,
+                  "DeliveriesToQualify": 0,
+                  "Categories": [{
+                    "OfferCategoryId": 0,
+                    "Value": 0,
+                    "Items": [{
+                      "OrderItemId": 0,
+                      "Confirmed": true
+                    }]
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                },
+                "example": {
+                  "OfferId": 0,
+                  "OfferMessage": "string",
+                  "OfferCode": "string",
+                  "OfferDesc": "string",
+                  "FriendlyURL": "string",
+                  "NumQualified": 0,
+                  "QualificationType": 1,
+                  "QualificationTypeName": "string",
+                  "NeedMore": 0,
+                  "NumCategories": 0,
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "CreditAmount": 0,
+                  "DeliveriesQualifying": 0,
+                  "IsCodeInProgress": true,
+                  "DeliveriesToQualify": 0,
+                  "Categories": [{
+                    "OfferCategoryId": 0,
+                    "Value": 0,
+                    "Items": [{
+                      "OrderItemId": 0,
+                      "Confirmed": true
+                    }]
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}/offers": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns Offers for specified customer and delivery date.",
+        "description": "Returns Offers for specified customer and delivery date.",
+        "operationId": "GetOrderOffers",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Offer.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                },
+                "example": {
+                  "OfferId": 0,
+                  "OfferMessage": "string",
+                  "OfferCode": "string",
+                  "OfferDesc": "string",
+                  "FriendlyURL": "string",
+                  "NumQualified": 0,
+                  "QualificationType": 1,
+                  "QualificationTypeName": "string",
+                  "NeedMore": 0,
+                  "NumCategories": 0,
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "CreditAmount": 0,
+                  "DeliveriesQualifying": 0,
+                  "IsCodeInProgress": true,
+                  "DeliveriesToQualify": 0,
+                  "Categories": [{
+                    "OfferCategoryId": 0,
+                    "Value": 0,
+                    "Items": [{
+                      "OrderItemId": 0,
+                      "Confirmed": true
+                    }]
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Offer"
+                },
+                "example": {
+                  "OfferId": 0,
+                  "OfferMessage": "string",
+                  "OfferCode": "string",
+                  "OfferDesc": "string",
+                  "FriendlyURL": "string",
+                  "NumQualified": 0,
+                  "QualificationType": 1,
+                  "QualificationTypeName": "string",
+                  "NeedMore": 0,
+                  "NumCategories": 0,
+                  "ValidFrom": "string",
+                  "ValidTo": "string",
+                  "CreditAmount": 0,
+                  "DeliveriesQualifying": 0,
+                  "IsCodeInProgress": true,
+                  "DeliveriesToQualify": 0,
+                  "Categories": [{
+                    "OfferCategoryId": 0,
+                    "Value": 0,
+                    "Items": [{
+                      "OrderItemId": 0,
+                      "Confirmed": true
+                    }]
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}/credits": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Returns credits for specified customer and delivery date.",
+        "description": "Returns credits for specified customer and delivery date.",
+        "operationId": "GetOrderCredits",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "confirmed",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": true
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Offer.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}/items": {
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Adds new OrderItem into items for specific delivery date and customer.",
+        "description": "Sample Request:\r\n\r\n    POST /items\r\n    {\r\n        \"ProductId\": 254,\r\n        \"Quantity\": 1,\r\n        \"Frequency\": 0\r\n    }",
+        "operationId": "PostItem",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the newly created item",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid or item id not specified",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Product was sold out, unavailable or past cutoff. Reason and available qty is returned.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "example": {
+                  "ErrorCode": 0,
+                  "ErrorName": "string",
+                  "Id": 0,
+                  "QuantityAvailable": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "example": {
+                  "ErrorCode": 0,
+                  "ErrorName": "string",
+                  "Id": 0,
+                  "QuantityAvailable": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/order/{deliveryDate}/item": {
+      "put": {
+        "tags": ["Orders"],
+        "summary": "Updates quantity on order for product and optional frequency.",
+        "description": "Sample Request:\r\n\r\n    PUT\r\n    {\r\n        \"productId\": 254,\r\n        \"quantity\": 1\r\n    }",
+        "operationId": "PutProduct",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "example": {
+                "DeliveryDate": "string",
+                "Confirmed": true,
+                "Id": 0,
+                "ProductId": 0,
+                "Quantity": 0,
+                "Frequency": 0,
+                "Price": 0,
+                "Type": 1,
+                "TypeName": "string",
+                "ErrorCode": 0,
+                "ErrorCodeName": "string",
+                "RelatedProductId": 0,
+                "RelatedQuantity": 0,
+                "Links": [{
+                  "Href": "string",
+                  "Rel": "string",
+                  "Method": "string"
+                }]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated item when successful.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                },
+                "example": {
+                  "DeliveryDate": "string",
+                  "Confirmed": true,
+                  "Id": 0,
+                  "ProductId": 0,
+                  "Quantity": 0,
+                  "Frequency": 0,
+                  "Price": 0,
+                  "Type": 1,
+                  "TypeName": "string",
+                  "ErrorCode": 0,
+                  "ErrorCodeName": "string",
+                  "RelatedProductId": 0,
+                  "RelatedQuantity": 0,
+                  "Links": [{
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Unable to accept update.  Error Message will indicate the issue.  When limited availability, the remaining availability is returned.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "example": {
+                  "ErrorCode": 0,
+                  "ErrorName": "string",
+                  "Id": 0,
+                  "QuantityAvailable": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                },
+                "example": {
+                  "ErrorCode": 0,
+                  "ErrorName": "string",
+                  "Id": 0,
+                  "QuantityAvailable": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/previous": {
+      "get": {
+        "tags": ["PreviousOrders"],
+        "summary": "Returns all Previous Orders for specified customer.",
+        "description": "Returns all Previous Orders for specified customer.",
+        "operationId": "GetPreviousOrders",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "sortOrder",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "$ref": "#/components/schemas/PreviousOrdersSortOrder"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PreviousOrder"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PreviousOrder"
+                  }
+                },
+                "example": [{
+                  "ProductId": 0,
+                  "FirstDelivery": "string",
+                  "LastDelivery": "string",
+                  "NumberOfDeliveries": 0,
+                  "NormalQuantity": 0,
+                  "ActualQuantity": 0,
+                  "TotalQuantity": 0
+                }]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PreviousOrder"
+                  }
+                },
+                "example": [{
+                  "ProductId": 0,
+                  "FirstDelivery": "string",
+                  "LastDelivery": "string",
+                  "NumberOfDeliveries": 0,
+                  "NormalQuantity": 0,
+                  "ActualQuantity": 0,
+                  "TotalQuantity": 0
+                }]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CodeInputResult": {
+        "type": "object",
+        "properties": {
+          "OfferCode": {
+            "type": "string",
+            "description": "Offer code attempted to input.",
+            "nullable": true
+          },
+          "ResultCode": {
+            "$ref": "#/components/schemas/CodeInputResultCode"
+          },
+          "ResultName": {
+            "type": "string",
+            "description": "ResultName representing description of result of code input.",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CodeInputResultCode": {
+        "enum": [0, 1, 2, 3, 4, 5, 6, 7],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ErrorCode": {
+        "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "Href": {
+            "type": "string",
+            "nullable": true
+          },
+          "Rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Offer": {
+        "type": "object",
+        "properties": {
+          "OfferId": {
+            "type": "integer",
+            "description": "Id of the Offer.",
+            "format": "int32"
+          },
+          "OfferMessage": {
+            "type": "string",
+            "description": "Message relating to the full status of the Offer.",
+            "nullable": true
+          },
+          "OfferCode": {
+            "type": "string",
+            "description": "Code of the Offer.",
+            "nullable": true
+          },
+          "OfferDesc": {
+            "type": "string",
+            "description": "Description of the Offer.",
+            "nullable": true
+          },
+          "FriendlyURL": {
+            "type": "string",
+            "description": "FriendlyURL of the Offer.",
+            "nullable": true
+          },
+          "NumQualified": {
+            "type": "integer",
+            "description": "Number of times qualified",
+            "format": "int32",
+            "nullable": true
+          },
+          "QualificationType": {
+            "$ref": "#/components/schemas/QualificationType"
+          },
+          "QualificationTypeName": {
+            "type": "string",
+            "description": "Type name of the Offer.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "NeedMore": {
+            "type": "number",
+            "description": "The amount more needed to qualify",
+            "format": "double"
+          },
+          "NumCategories": {
+            "type": "integer",
+            "description": "The number of categories",
+            "format": "int32"
+          },
+          "ValidFrom": {
+            "type": "string",
+            "description": "Date the Offer is Valid From",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ValidTo": {
+            "type": "string",
+            "description": "Date the Offer is Valid To.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CreditAmount": {
+            "type": "number",
+            "description": "CreditAmount of the Offer.",
+            "format": "double",
+            "nullable": true
+          },
+          "DeliveriesQualifying": {
+            "type": "integer",
+            "description": "Number of deliveries that have qualified",
+            "format": "int32",
+            "nullable": true
+          },
+          "IsCodeInProgress": {
+            "type": "boolean",
+            "description": "Is the offer related to a code that has been applied to an order past cut \r\n            off?"
+          },
+          "DeliveriesToQualify": {
+            "type": "integer",
+            "description": "Number of deliveries needed to qualify for the Offer.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderOfferCategory"
+            },
+            "description": "List of the order offer categories",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferCode": {
+        "type": "object",
+        "properties": {
+          "OfferId": {
+            "type": "integer",
+            "description": "Id of the Offer.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "description": "Code of the Offer.",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of the Offer.",
+            "nullable": true
+          },
+          "FriendlyURL": {
+            "type": "string",
+            "description": "FriendlyURL of the Offer.",
+            "nullable": true
+          },
+          "ValidFrom": {
+            "type": "string",
+            "description": "Date the Offer is Valid From",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ValidTo": {
+            "type": "string",
+            "description": "Date the Offer is Valid To.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IsInProgress": {
+            "type": "boolean",
+            "description": "Has the offer already been applied to orders?"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "DeliveryDate": {
+            "type": "string",
+            "description": "Delivery Date of the customer Order.",
+            "format": "date-time"
+          },
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            },
+            "description": "Queryable collection of OrderItem due for delivery on DeliveryDate.",
+            "nullable": true
+          },
+          "Offers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Offer"
+            },
+            "description": "List of offers on this order.",
+            "nullable": true
+          },
+          "Credits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            },
+            "description": "List of credits on this order.",
+            "nullable": true
+          },
+          "OrderStatus": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "OrderStatusName": {
+            "type": "string",
+            "description": "The order status description.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CanOrder": {
+            "type": "boolean",
+            "description": "True if customer can still place orders for date."
+          },
+          "NumItems": {
+            "type": "integer",
+            "description": "The number of items in the order.",
+            "format": "int32",
+            "nullable": true
+          },
+          "OrderValue": {
+            "type": "number",
+            "description": "The total value of the order.",
+            "format": "double",
+            "nullable": true
+          },
+          "OrderValueBeforeDiscounts": {
+            "type": "number",
+            "description": "The total value of the order before discounts.",
+            "format": "double",
+            "nullable": true
+          },
+          "MinimumOrderValue": {
+            "type": "number",
+            "description": "The minimum order value for this customer.",
+            "format": "double",
+            "nullable": true
+          },
+          "DeliveryCharge": {
+            "type": "number",
+            "description": "The delivery charge amount.",
+            "format": "double",
+            "nullable": true
+          },
+          "OfferDiscounts": {
+            "type": "number",
+            "description": "The amount of discount from the offers.",
+            "format": "double",
+            "nullable": true
+          },
+          "OtherCredits": {
+            "type": "number",
+            "description": "The amount off from other credits.",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalSavings": {
+            "type": "number",
+            "description": "The total amount of discount from offers, credits and discounts.",
+            "format": "double",
+            "nullable": true
+          },
+          "Payments": {
+            "type": "number",
+            "description": "The amount paid.",
+            "format": "double",
+            "nullable": true
+          },
+          "OrderTotal": {
+            "type": "number",
+            "description": "The total amount paid by the customer.",
+            "format": "double",
+            "nullable": true
+          },
+          "TotalBeforeDiscounts": {
+            "type": "number",
+            "description": "The total order value and del charge for discounts.",
+            "format": "double",
+            "nullable": true
+          },
+          "Confirmed": {
+            "type": "boolean",
+            "description": "WHether order is confirmed (full order) or not (basket)."
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderItem": {
+        "required": ["Quantity"],
+        "type": "object",
+        "properties": {
+          "DeliveryDate": {
+            "type": "string",
+            "description": "Delivery Date of the customer Order.",
+            "format": "date-time"
+          },
+          "Confirmed": {
+            "type": "boolean",
+            "description": "True confirmed order, false if basket item.",
+            "nullable": true
+          },
+          "Id": {
+            "type": "integer",
+            "description": "Unique Id for order item (aka TransactionId). Null only on Insert.",
+            "format": "int32",
+            "nullable": true
+          },
+          "ProductId": {
+            "type": "integer",
+            "description": "Id for the Product on Order for this OrderItem.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Quantity": {
+            "type": "integer",
+            "description": "The Quantity of the product on order for this Order Item.",
+            "format": "int32"
+          },
+          "Frequency": {
+            "type": "integer",
+            "description": "The Frequency in terms of number of weeks recurring for this item.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Price": {
+            "type": "number",
+            "description": "The Price of the product on ordedr for this item.",
+            "format": "double",
+            "nullable": true
+          },
+          "Type": {
+            "$ref": "#/components/schemas/OrderItemType"
+          },
+          "TypeName": {
+            "type": "string",
+            "description": "The Type name of the type for the item.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ErrorCode": {
+            "$ref": "#/components/schemas/ErrorCode"
+          },
+          "ErrorCodeName": {
+            "type": "string",
+            "description": "The ErroCode name if there is unavailability for this item.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "RelatedProductId": {
+            "type": "integer",
+            "description": "The RelatedProductId if there is a substitution for this item.",
+            "format": "int32",
+            "nullable": true
+          },
+          "RelatedQuantity": {
+            "type": "integer",
+            "description": "The RelatedQuantity if there is a substiution for this item.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderItemType": {
+        "enum": [1, 2, 3, 4],
+        "type": "integer",
+        "format": "int32"
+      },
+      "OrderOfferCategory": {
+        "type": "object",
+        "properties": {
+          "OfferCategoryId": {
+            "type": "integer",
+            "description": "Id of the Offer Category.",
+            "format": "int32"
+          },
+          "Value": {
+            "type": "number",
+            "description": "The value.",
+            "format": "double"
+          },
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderOfferItem"
+            },
+            "description": "A collection of Items for the Order Offer Category.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderOfferItem": {
+        "type": "object",
+        "properties": {
+          "OrderItemId": {
+            "type": "integer",
+            "description": "Id of the related order item.",
+            "format": "int32"
+          },
+          "Confirmed": {
+            "type": "boolean",
+            "description": "Whether the order item and order is confirmed or unconfirmed (basket item)."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderStatus": {
+        "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "type": "integer",
+        "description": "1: Open_Empty - Future Order with no items.<br />\r\n2: Open_UnderMinimum - Future Order but under minimum required spend.<br />\r\n3: Open_Scheduled - Future Order and will be delivered (Assumes customer is valid in all other ways).<br />\r\n4: Packing - Order being packed.<br />\r\n5: Delivering - Order out for Delivery.<br />\r\n6: Delivered - Order has been Delivered (not flagged until roll out of driver app).<br />\r\n7: Past - Order occurs in the past.<br />\r\n8: Archived - Order detail has expired and been moved to slower moving storage.<br />\r\n9: AccountLocked - Account issue prevents order amendments.<br />\r\n10: Open_OnHoliday - Customer has holiday date set for future date.<br />\r\n11: Closed_OnHoliday - Customer has holiday for the current delivery which is past cutoff.<br />",
+        "format": "int32"
+      },
+      "PreviousOrder": {
+        "type": "object",
+        "properties": {
+          "ProductId": {
+            "type": "integer",
+            "description": "Id of the product.",
+            "format": "int32"
+          },
+          "FirstDelivery": {
+            "type": "string",
+            "description": "Delivery Date of the First Order.",
+            "format": "date-time"
+          },
+          "LastDelivery": {
+            "type": "string",
+            "description": "Delivery Date of the First Order.",
+            "format": "date-time"
+          },
+          "NumberOfDeliveries": {
+            "type": "integer",
+            "description": "Total Number of Deliveries.",
+            "format": "int32"
+          },
+          "NormalQuantity": {
+            "type": "integer",
+            "description": "Normal Quanitity Ordered.",
+            "format": "int32"
+          },
+          "ActualQuantity": {
+            "type": "integer",
+            "description": "Actual Quantity for given delivey Date",
+            "format": "int32",
+            "nullable": true
+          },
+          "TotalQuantity": {
+            "type": "integer",
+            "description": "Total Quantity for given delivery Date",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PreviousOrdersSortOrder": {
+        "enum": [0, 1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "QualificationType": {
+        "enum": [1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "UpdateResult": {
+        "type": "object",
+        "properties": {
+          "ErrorCode": {
+            "$ref": "#/components/schemas/ErrorCode"
+          },
+          "ErrorName": {
+            "type": "string",
+            "description": "Unique Id for order item (aka TransactionId). Null only on Insert.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Id": {
+            "type": "integer",
+            "description": "Unique Id for a new order item (aka TransactionId/BasketItemId).",
+            "format": "int32",
+            "nullable": true
+          },
+          "QuantityAvailable": {
+            "type": "integer",
+            "description": "The Quantity of the product available for the Order Item.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }, {
+    "apiKeyQuery": []
+  }]
+}

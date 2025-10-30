@@ -1,0 +1,3848 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ACPersonalisationAPI V3",
+    "description": "A web API to personalise products and contents from A&C",
+    "version": "v3"
+  },
+  "servers": [{
+    "url": "https://apigw-test.abelandcole.co.uk/personalisation/v3"
+  }],
+  "paths": {
+    "/dislikes/customer": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get customer dislikes by customer Id",
+        "description": "Sample Request:\r\n<br>GET /dislikes/customer/169095",
+        "operationId": "GetCustomerDislikesByCustomerId3",
+        "parameters": [{
+          "name": "showHidden",
+          "in": "query",
+          "description": "Show secret dislikes",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1533445073
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1917476207
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the CustomerDislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDislikesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DislikeId": 0,
+                    "DateAdded": "string",
+                    "Hidden": true
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer Dislike not found (Customer and/or Dislike)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Dislikes"],
+        "summary": "Add a new Customer Dislike",
+        "description": "Sample Requests:\r\n<br>POST /dislikes/customer/169095<br>Body\r\n{\r\n    \"dislikeId\": 1\r\n}",
+        "operationId": "AddCustomerDislike3",
+        "parameters": [{
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1305339982
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1546782104
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "requestBody": {
+          "description": "New Customer Dislike ACPersonalisation.Core.Models.Dislikes.CustomerDislike",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomerDislike"
+              },
+              "example": {
+                "DislikeId": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the Dislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDislikeResponse"
+                },
+                "example": {
+                  "Result": {
+                    "DislikeId": 0,
+                    "DateAdded": "string",
+                    "Hidden": true
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Dislike already applied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Dislike cannot be processed (Limit exceeded)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get all dislikes",
+        "description": "Sample Requests:\r\n<br>GET /dislikes?showHidden=true<br>GET /dislikes?showHidden=false<br>GET /dislikes",
+        "operationId": "GetDislikes3",
+        "parameters": [{
+          "name": "showHidden",
+          "in": "query",
+          "description": "Show secret dislikes",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 2082413314
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 684062146
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Dislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DislikesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "Id": 0,
+                    "Name": "string",
+                    "ContentTypeId": 0,
+                    "ContentType": "string",
+                    "ImageUrl": "string",
+                    "Hidden": true
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes/{dislikeId}": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get a Dislike by Dislike Id",
+        "description": "Sample Requests:\r\n<br>GET /dislikes/1",
+        "operationId": "GetDislikeByDislikeId3",
+        "parameters": [{
+          "name": "dislikeId",
+          "in": "path",
+          "description": "Format - int32. The Id of the Dislike",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1444066824
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 232361451
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Dislikes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DislikeResponse"
+                },
+                "example": {
+                  "Result": {
+                    "Id": 0,
+                    "Name": "string",
+                    "ContentTypeId": 0,
+                    "ContentType": "string",
+                    "ImageUrl": "string",
+                    "Hidden": true
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dislikes/{dislikeId}/customer": {
+      "get": {
+        "tags": ["Dislikes"],
+        "summary": "Get a Dislike by Dislike Id",
+        "description": "Sample Requests:\r\n<br>GET /dislikes/1/customer/169095",
+        "operationId": "GetCustomerDislikeByDislikeId3",
+        "parameters": [{
+          "name": "dislikeId",
+          "in": "path",
+          "description": "Format - int32. The Id of the Dislike",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1341697170
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 419928024
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Dislike",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDislikeResponse"
+                },
+                "example": {
+                  "Result": {
+                    "DislikeId": 0,
+                    "DateAdded": "string",
+                    "Hidden": true
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Dislikes"],
+        "summary": "Delete a Customer Dislike",
+        "description": "Sample Requests:\r\n<br>DELETE /dislikes/1/customer/169095",
+        "operationId": "DeleteCustomerDislike3",
+        "parameters": [{
+          "name": "dislikeId",
+          "in": "path",
+          "description": "Format - int32. Id of the Dislike",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 213008842
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 2036386664
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Dislike not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/check/up": {
+      "get": {
+        "tags": ["HealthCheck"],
+        "summary": "Check if the API has healthy connections to Database and any External connectors",
+        "description": "Check if the API has healthy connections to Database and any External connectors",
+        "operationId": "GetCheckUp3",
+        "parameters": [{
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 748096676
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1259133909
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Services are all healthy",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "One or more services is unhealthy",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/{contentId}": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns generic content info for specified content id.",
+        "description": "# Sample Request:\r\nGET /content/971",
+        "operationId": "GetContent3",
+        "parameters": [{
+          "name": "contentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 2083439436
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 925172732
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the content details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentResponse"
+                },
+                "example": {
+                  "Result": {
+                    "ContentId": 0,
+                    "ContentName": "string",
+                    "ContentDesc": "string",
+                    "ContentType": 0,
+                    "ContentTypeName": "string",
+                    "ContentImageName": "string",
+                    "CountryOfOrigin": "string",
+                    "VarietyName": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content with this content id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/customer/contents": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product contents.",
+        "description": "# Sample Request:\r\nGET /product/6047/customer/130587/contents?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- OriginalContent - returns original content name, image and other details\r\n- CurrentContent - returns current content name, image and other details\r\n- Alternatives - returns collection of alternative contents which could replace this content\r\n- Alternatives.Content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContents3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 114566389
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 2122062910
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductContentsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DeliveryDate": "string",
+                    "OriginalContentId": 0,
+                    "CurrentContentId": 0,
+                    "NeverSend": true,
+                    "CurrentContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "OriginalContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Alternatives": [{
+                      "ContentId": 0,
+                      "ExtraPortion": true,
+                      "NeverSend": true,
+                      "Content": {
+                        "ContentId": 0,
+                        "ContentName": "string",
+                        "ContentDesc": "string",
+                        "ContentType": 0,
+                        "ContentTypeName": "string",
+                        "ContentImageName": "string",
+                        "CountryOfOrigin": "string",
+                        "VarietyName": "string",
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/contents": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product contents for anonymous customers",
+        "description": "# Sample Request:\r\nGET /product/6047/contents?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- OriginalContent - returns original content name, image and other details\r\n- CurrentContent - returns current content name, image and other details\r\n- Alternatives - returns collection of alternative contents which could replace this content\r\n- Alternatives.Content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContentsAnonymous3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1024141983
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 622186307
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductContentsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DeliveryDate": "string",
+                    "OriginalContentId": 0,
+                    "CurrentContentId": 0,
+                    "NeverSend": true,
+                    "CurrentContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "OriginalContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Alternatives": [{
+                      "ContentId": 0,
+                      "ExtraPortion": true,
+                      "NeverSend": true,
+                      "Content": {
+                        "ContentId": 0,
+                        "ContentName": "string",
+                        "ContentDesc": "string",
+                        "ContentType": 0,
+                        "ContentTypeName": "string",
+                        "ContentImageName": "string",
+                        "CountryOfOrigin": "string",
+                        "VarietyName": "string",
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/customer/content/{originalContentId}": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product content object for specific original content id.",
+        "description": "# Sample Request:\r\nGET /product/6047/customer/130587/content/971?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContent3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 286266442
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1143077016
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the content of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductContentResponse"
+                },
+                "example": {
+                  "Result": {
+                    "DeliveryDate": "string",
+                    "OriginalContentId": 0,
+                    "CurrentContentId": 0,
+                    "NeverSend": true,
+                    "CurrentContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "OriginalContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Alternatives": [{
+                      "ContentId": 0,
+                      "ExtraPortion": true,
+                      "NeverSend": true,
+                      "Content": {
+                        "ContentId": 0,
+                        "ContentName": "string",
+                        "ContentDesc": "string",
+                        "ContentType": 0,
+                        "ContentTypeName": "string",
+                        "ContentImageName": "string",
+                        "CountryOfOrigin": "string",
+                        "VarietyName": "string",
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This content for this product id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["ProductContent"],
+        "summary": "Updates product content to specified alternative content.",
+        "description": "# Sample Request:\r\nPUT /product/6047/customer/130587/content/971?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date this is not yet past cutoff is used.",
+        "operationId": "PutContent3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1858100287
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1642921446
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent"
+              },
+              "example": {
+                "NewContentId": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updates the curent content of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Matching content for this product was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/content/{originalContentId}": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns product content object for specific original content id for anonymous customers",
+        "description": "# Sample Request:\r\nGET /product/6047/content/971?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n    \r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetProductContentAnonymous3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1721709350
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1497766424
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the content of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductContentResponse"
+                },
+                "example": {
+                  "Result": {
+                    "DeliveryDate": "string",
+                    "OriginalContentId": 0,
+                    "CurrentContentId": 0,
+                    "NeverSend": true,
+                    "CurrentContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "OriginalContent": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Alternatives": [{
+                      "ContentId": 0,
+                      "ExtraPortion": true,
+                      "NeverSend": true,
+                      "Content": {
+                        "ContentId": 0,
+                        "ContentName": "string",
+                        "ContentDesc": "string",
+                        "ContentType": 0,
+                        "ContentTypeName": "string",
+                        "ContentImageName": "string",
+                        "CountryOfOrigin": "string",
+                        "VarietyName": "string",
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This content for this product id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/customer/content/{originalContentId}/alternatives": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns alternative contents for specified product content.",
+        "description": "# Sample Request:\r\nGET /product/6047/customer/130587/content/971/alternatives?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetAlternatives3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1446035598
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 705499147
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternativeContentsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "ContentId": 0,
+                    "ExtraPortion": true,
+                    "NeverSend": true,
+                    "Content": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/content/{originalContentId}/alternatives": {
+      "get": {
+        "tags": ["ProductContent"],
+        "summary": "Returns alternative contents for specified product content for anonymous customers",
+        "description": "# Sample Request:\r\nGET /product/6047/content/971/alternatives?delDate=2019-10-17\r\n- If delDate is ommitted then the first delivery date not yet past cutoff is used. \r\n- If customerId is ommitted then only default contents are shown for the product.\r\n# Expand behaviour:\r\nBy default all sub objects will be left null but you can include an \"expand\" option in the query string to add referenced objects to the objects returned.\r\nSeparate any of these fields with a comma:\r\n- originalContent - returns original content name, image and other details\r\n- currentContent - returns current content name, image and other details\r\n- alternatives - returns collection of alternative contents which could replace this content\r\n- alternatives.content - for each alternative content the content name, image etc also returned",
+        "operationId": "GetAlternativesAnonymous3",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "originalContentId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "delDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1980833573
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 841251764
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the contents of the product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternativeContentsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "ContentId": 0,
+                    "ExtraPortion": true,
+                    "NeverSend": true,
+                    "Content": {
+                      "ContentId": 0,
+                      "ContentName": "string",
+                      "ContentDesc": "string",
+                      "ContentType": 0,
+                      "ContentTypeName": "string",
+                      "ContentImageName": "string",
+                      "CountryOfOrigin": "string",
+                      "VarietyName": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contents for this product id were not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recommendation/{recommendationType}/customer": {
+      "get": {
+        "tags": ["Recommendation"],
+        "summary": "Returns recommendations from the provider using the specified recommendation\r\n           type - only returning products available for customer's next delivery.",
+        "description": "# Sample Requests:\r\nGET /recommendation/home/customer/1234\r\nGET /recommendation/2/customer/1234?maxResults=10&productId=2468\r\n# Recommendation Types:\r\nYou can use the name or the id for the recommendation types which are:\r\n- Home(1) - aka Spotlight - returns top recommendations excluding products currently on order for specified customer\r\n- Product(2) - aka Also Try - returns top recommendations associated with specified product excluding any already on order for customer\r\n- Checkout(3) - aka Interrupt - returns recommendations as an interrupt on checkout for products relating to (but exluding) those on order\r\n- Deliveries(4) - aka Top Picks - returns recommendations statically displayed on My Deliveries for products relating to (but exluding) those on order",
+        "operationId": "GetRecommendation3",
+        "parameters": [{
+          "name": "recommendationType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        }, {
+          "name": "productId",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 946763666
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 192052175
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the recommendation details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                },
+                "example": {
+                  "Result": {
+                    "RecommendationType": 1,
+                    "CustomerId": 0,
+                    "ProductId": 0,
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Recommendation type specified was not valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                },
+                "example": {
+                  "Result": {
+                    "RecommendationType": 1,
+                    "CustomerId": 0,
+                    "ProductId": 0,
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No results could be found for this recommendation type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                },
+                "example": {
+                  "Result": {
+                    "RecommendationType": 1,
+                    "CustomerId": 0,
+                    "ProductId": 0,
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recommendation/{recommendationType}": {
+      "get": {
+        "tags": ["Recommendation"],
+        "summary": "Returns recommendations for anonymous customers from the provider using the specified recommendation\r\ntype - only returning products available for customer's next delivery.",
+        "description": "# Sample Requests:\r\nGET /recommendation/home\r\nGET /recommendation/2?maxResults=10&productId=2468\r\n# Recommendation Types:\r\nYou can use the name or the id for the recommendation types which are:\r\n- Home(1) - aka Spotlight - returns top recommendations excluding products currently on order for specified customer\r\n- Product(2) - aka Also Try - returns top recommendations associated with specified product excluding any already on order for customer\r\n- Checkout(3) - aka Interrupt - returns recommendations as an interrupt on checkout for products relating to (but exluding) those on order\r\n- Deliveries(4) - aka Top Picks - returns recommendations statically displayed on My Deliveries for products relating to (but exluding) those on order",
+        "operationId": "GetRecommendationAnonymous3",
+        "parameters": [{
+          "name": "recommendationType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        }, {
+          "name": "productId",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 686964825
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 241787492
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the recommendation details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                },
+                "example": {
+                  "Result": {
+                    "RecommendationType": 1,
+                    "CustomerId": 0,
+                    "ProductId": 0,
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Recommendation type specified was not valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                },
+                "example": {
+                  "Result": {
+                    "RecommendationType": 1,
+                    "CustomerId": 0,
+                    "ProductId": 0,
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No results could be found for this recommendation type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                },
+                "example": {
+                  "Result": {
+                    "RecommendationType": 1,
+                    "CustomerId": 0,
+                    "ProductId": 0,
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/{searchTerm}/customer": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Returns the full search result using `AutoCorrect` unless different search type specified. If there are no results\r\nand there is an alternative spelling to suggest it will automatically return results \r\nfor new spelling.",
+        "description": "# Sample Request:\r\nGET /search/beef/customer/1551751?searchType=3&maxResults=50\r\n# SearchType breakdown\r\nYou can use the id for the search types which are:\r\n- AutoComplete (1) - used as you type, returns likely searches and products for what you might be typing.\r\n- SpellCheck (2) - for full search, if there are no results it will suggest an alternative spelling without querying results for that suggestion.\r\n- AutoCorrect (3) - for full search, if there are no results it will look up results for alternative suggested spelling if available.",
+        "operationId": "GetSearch3",
+        "parameters": [{
+          "name": "searchTerm",
+          "in": "path",
+          "description": "Term to search for",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "searchType",
+          "in": "query",
+          "description": "Format - int32. Type of search to perform",
+          "schema": {
+            "$ref": "#/components/schemas/SearchType"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32. Maximum number of results to return",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1021633623
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1858008191
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Search details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                },
+                "example": {
+                  "Result": {
+                    "SearchTerm": "string",
+                    "SearchType": 1,
+                    "IsMatch": true,
+                    "SearchSuggestions": [{
+                      "SearchTerm": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Search for this type of search for this search term returned no matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                },
+                "example": {
+                  "Result": {
+                    "SearchTerm": "string",
+                    "SearchType": 1,
+                    "IsMatch": true,
+                    "SearchSuggestions": [{
+                      "SearchTerm": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/{searchTerm}": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Returns full search result using 'AutoCorrect'  unless different search type specified for anonymous customers. If there are no results\r\nand there is an alternative spelling to suggest it will automatically return results for new spelling.",
+        "description": "# Sample Request:\r\nGET /search/beef?searchType=3&maxResults=50\r\n# SearchType breakdown\r\nYou can use the id for the search types which are:\r\n- AutoComplete (1) - used as you type, returns likely searches and products for what you might be typing.\r\n- SpellCheck (2) - for full search, if there are no results it will suggest an alternative spelling without querying results for that suggestion.\r\n- AutoCorrect (3) - for full search, if there are no results it will look up results for alternative suggested spelling if available.",
+        "operationId": "GetSearchAnonymous3",
+        "parameters": [{
+          "name": "searchTerm",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "searchType",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "$ref": "#/components/schemas/SearchType"
+          }
+        }, {
+          "name": "maxResults",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1286350942
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 623044201
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Search details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                },
+                "example": {
+                  "Result": {
+                    "SearchTerm": "string",
+                    "SearchType": 1,
+                    "IsMatch": true,
+                    "SearchSuggestions": [{
+                      "SearchTerm": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Search for this type of search for this search term returned no matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                },
+                "example": {
+                  "Result": {
+                    "SearchTerm": "string",
+                    "SearchType": 1,
+                    "IsMatch": true,
+                    "SearchSuggestions": [{
+                      "SearchTerm": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "ProductSuggestions": [{
+                      "ProductId": 0
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/choose": {
+      "get": {
+        "tags": ["Choice"],
+        "summary": "GetChoice",
+        "operationId": "GetChoice",
+        "parameters": [{
+          "name": "choices",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "location",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "pageType",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "SessionId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 1234938354
+        }, {
+          "name": "UserId",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": 209955829
+        }, {
+          "name": "IPAddress",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "192.168.1.1"
+        }, {
+          "name": "DeviceInfo",
+          "in": "header",
+          "schema": {
+            "type": "string"
+          },
+          "example": "swagger"
+        }, {
+          "name": "ActiveConsent",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }, {
+          "name": "AutoTracking",
+          "in": "header",
+          "schema": {
+            "type": "boolean"
+          },
+          "example": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChoiceResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DecisionId": "string",
+                    "Choice": "string",
+                    "Experience": "string",
+                    "Variation": "string",
+                    "Recommendations": [{
+                      "RecommendationId": "string",
+                      "ProductId": 0
+                    }],
+                    "Payload": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "207": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChoiceResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DecisionId": "string",
+                    "Choice": "string",
+                    "Experience": "string",
+                    "Variation": "string",
+                    "Recommendations": [{
+                      "RecommendationId": "string",
+                      "ProductId": 0
+                    }],
+                    "Payload": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChoiceResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DecisionId": "string",
+                    "Choice": "string",
+                    "Experience": "string",
+                    "Variation": "string",
+                    "Recommendations": [{
+                      "RecommendationId": "string",
+                      "ProductId": 0
+                    }],
+                    "Payload": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChoiceResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DecisionId": "string",
+                    "Choice": "string",
+                    "Experience": "string",
+                    "Variation": "string",
+                    "Recommendations": [{
+                      "RecommendationId": "string",
+                      "ProductId": 0
+                    }],
+                    "Payload": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChoiceResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DecisionId": "string",
+                    "Choice": "string",
+                    "Experience": "string",
+                    "Variation": "string",
+                    "Recommendations": [{
+                      "RecommendationId": "string",
+                      "ProductId": 0
+                    }],
+                    "Payload": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AlternativeContent": {
+        "type": "object",
+        "properties": {
+          "ContentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ExtraPortion": {
+            "type": "boolean"
+          },
+          "NeverSend": {
+            "type": "boolean"
+          },
+          "Content": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlternativeContentsResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlternativeContent"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "ErrorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ErrorCodeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ErrorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "ErrorObject": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChoiceResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Decision"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Content": {
+        "type": "object",
+        "properties": {
+          "ContentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ContentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentType": {
+            "$ref": "#/components/schemas/ContentType"
+          },
+          "ContentTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ContentImageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "CountryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "VarietyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentType": {
+        "enum": [0, 1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CustomerDislike": {
+        "type": "object",
+        "properties": {
+          "DislikeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DateAdded": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Hidden": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerDislikeResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/CustomerDislike"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerDislikesResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerDislike"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Decision": {
+        "type": "object",
+        "properties": {
+          "DecisionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Choice": {
+            "type": "string",
+            "nullable": true
+          },
+          "Experience": {
+            "type": "string",
+            "nullable": true
+          },
+          "Variation": {
+            "type": "string",
+            "nullable": true
+          },
+          "Recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recommendations"
+            },
+            "nullable": true
+          },
+          "Payload": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceContext": {
+        "type": "object",
+        "properties": {
+          "SessionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IPAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "DeviceInfo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActiveConsent": {
+            "type": "boolean"
+          },
+          "AutoTracking": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dislike": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "Hidden": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DislikeResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/Dislike"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DislikesResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dislike"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealthCheckResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HttpStatusCode": {
+        "enum": [100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 421, 422, 423, 424, 426, 428, 429, 431, 451, 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "Href": {
+            "type": "string",
+            "nullable": true
+          },
+          "Rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewContent": {
+        "type": "object",
+        "properties": {
+          "NewContentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewCustomerDislike": {
+        "type": "object",
+        "properties": {
+          "DislikeId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductContent": {
+        "type": "object",
+        "properties": {
+          "DeliveryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "OriginalContentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CurrentContentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "NeverSend": {
+            "type": "boolean"
+          },
+          "CurrentContent": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "OriginalContent": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "Alternatives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlternativeContent"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductContentResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/ProductContent"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductContentsResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductContent"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductSuggestion": {
+        "type": "object",
+        "properties": {
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Recommendation": {
+        "type": "object",
+        "properties": {
+          "RecommendationType": {
+            "$ref": "#/components/schemas/RecommendationType"
+          },
+          "CustomerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ProductId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ProductSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductSuggestion"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecommendationResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/Recommendation"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecommendationType": {
+        "enum": [1, 2, 3, 4],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Recommendations": {
+        "type": "object",
+        "properties": {
+          "RecommendationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/SearchResult"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchResult": {
+        "type": "object",
+        "properties": {
+          "SearchTerm": {
+            "type": "string",
+            "nullable": true
+          },
+          "SearchType": {
+            "$ref": "#/components/schemas/SearchType"
+          },
+          "IsMatch": {
+            "type": "boolean"
+          },
+          "SearchSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchSuggestion"
+            },
+            "nullable": true
+          },
+          "ProductSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductSuggestion"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchSuggestion": {
+        "type": "object",
+        "properties": {
+          "SearchTerm": {
+            "type": "string",
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchType": {
+        "enum": [1, 2, 3],
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }, {
+    "apiKeyQuery": []
+  }],
+  "tags": [{
+    "name": "Dislikes",
+    "description": "Provides API endpoints for viewing and modifiying dislikes and customer dislikes in Personalisation API"
+  }]
+}

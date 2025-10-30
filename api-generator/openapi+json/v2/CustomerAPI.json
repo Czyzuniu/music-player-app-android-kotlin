@@ -1,0 +1,4521 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Customer API V2",
+    "description": "API that returns customers",
+    "version": "v2"
+  },
+  "servers": [
+    {
+      "url": "https://acapim-dev-uks.azure-api.net/customer/v2"
+    }
+  ],
+  "paths": {
+    "/customer/authentication/singleauthkey": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Create a one-time-key for access to a particular site page",
+        "description": "Sample Request:\r\n\r\n    POST\r\n    {\r\n        \"PagePath\": \"/account/personaldetails\"\r\n    }",
+        "operationId": "PostSingleAuthKey",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleAuthKeyRequest"
+              },
+              "example": {
+                "PagePath": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleAuthKeyRequest"
+              },
+              "example": {
+                "PagePath": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleAuthKeyRequest"
+              },
+              "example": {
+                "PagePath": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleAuthKeyRequest"
+              },
+              "example": {
+                "PagePath": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the created item.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleAuthKeyResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleAuthKeyResponse"
+                },
+                "example": {
+                  "PagePath": "string",
+                  "KeyIdentifier": "string",
+                  "ExpiresAt": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleAuthKeyResponse"
+                },
+                "example": {
+                  "PagePath": "string",
+                  "KeyIdentifier": "string",
+                  "ExpiresAt": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorised to use this endpoint",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Gets the customer details.",
+        "description": "Gets the customer details.",
+        "operationId": "GetCustomer",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "Title": "string",
+                  "FirstName": "string",
+                  "LastName": "string",
+                  "HomePhone": "string",
+                  "MobilePhone": "string",
+                  "EmailAddress": "string",
+                  "ProfileName": "string",
+                  "DateOfBirth": "string",
+                  "CustomerType": 1,
+                  "CustomerTypeName": "string",
+                  "CustomerStatus": 0,
+                  "CustomerStatusName": "string",
+                  "CustomerActiveMarketingStatus": 1,
+                  "CustomerActiveMarketingStatusName": "string",
+                  "PaymentStatus": 1,
+                  "PaymentStatusName": "string",
+                  "CanAccess": true,
+                  "CanOrder": true,
+                  "NumDeliveries": 0,
+                  "DayNumber": 0,
+                  "SourceDescription": "string",
+                  "SourceReference": "string",
+                  "Owes": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "Title": "string",
+                  "FirstName": "string",
+                  "LastName": "string",
+                  "HomePhone": "string",
+                  "MobilePhone": "string",
+                  "EmailAddress": "string",
+                  "ProfileName": "string",
+                  "DateOfBirth": "string",
+                  "CustomerType": 1,
+                  "CustomerTypeName": "string",
+                  "CustomerStatus": 0,
+                  "CustomerStatusName": "string",
+                  "CustomerActiveMarketingStatus": 1,
+                  "CustomerActiveMarketingStatusName": "string",
+                  "PaymentStatus": 1,
+                  "PaymentStatusName": "string",
+                  "CanAccess": true,
+                  "CanOrder": true,
+                  "NumDeliveries": 0,
+                  "DayNumber": 0,
+                  "SourceDescription": "string",
+                  "SourceReference": "string",
+                  "Owes": 0
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Deletes the customer.",
+        "description": "Deletes the customer.",
+        "operationId": "DeleteCustomer",
+        "parameters": [
+          {
+            "name": "isHardDelete",
+            "in": "query",
+            "description": "True if we need to add a Data Removal Request record",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "Title": "string",
+                  "FirstName": "string",
+                  "LastName": "string",
+                  "HomePhone": "string",
+                  "MobilePhone": "string",
+                  "EmailAddress": "string",
+                  "ProfileName": "string",
+                  "DateOfBirth": "string",
+                  "CustomerType": 1,
+                  "CustomerTypeName": "string",
+                  "CustomerStatus": 0,
+                  "CustomerStatusName": "string",
+                  "CustomerActiveMarketingStatus": 1,
+                  "CustomerActiveMarketingStatusName": "string",
+                  "PaymentStatus": 1,
+                  "PaymentStatusName": "string",
+                  "CanAccess": true,
+                  "CanOrder": true,
+                  "NumDeliveries": 0,
+                  "DayNumber": 0,
+                  "SourceDescription": "string",
+                  "SourceReference": "string",
+                  "Owes": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "Title": "string",
+                  "FirstName": "string",
+                  "LastName": "string",
+                  "HomePhone": "string",
+                  "MobilePhone": "string",
+                  "EmailAddress": "string",
+                  "ProfileName": "string",
+                  "DateOfBirth": "string",
+                  "CustomerType": 1,
+                  "CustomerTypeName": "string",
+                  "CustomerStatus": 0,
+                  "CustomerStatusName": "string",
+                  "CustomerActiveMarketingStatus": 1,
+                  "CustomerActiveMarketingStatusName": "string",
+                  "PaymentStatus": 1,
+                  "PaymentStatusName": "string",
+                  "CanAccess": true,
+                  "CanOrder": true,
+                  "NumDeliveries": 0,
+                  "DayNumber": 0,
+                  "SourceDescription": "string",
+                  "SourceReference": "string",
+                  "Owes": 0
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Updates the customer details.",
+        "description": "Updates the customer details.",
+        "operationId": "PutCustomer",
+        "requestBody": {
+          "description": "Customer information to be updated.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              },
+              "example": {
+                "Title": "string",
+                "FirstName": "string",
+                "LastName": "string",
+                "HomePhone": "string",
+                "MobilePhone": "string",
+                "EmailAddress": "string",
+                "ProfileName": "string",
+                "DateOfBirth": "string",
+                "CustomerType": 1,
+                "CustomerTypeName": "string",
+                "CustomerStatus": 0,
+                "CustomerStatusName": "string",
+                "CustomerActiveMarketingStatus": 1,
+                "CustomerActiveMarketingStatusName": "string",
+                "PaymentStatus": 1,
+                "PaymentStatusName": "string",
+                "CanAccess": true,
+                "CanOrder": true,
+                "NumDeliveries": 0,
+                "DayNumber": 0,
+                "SourceDescription": "string",
+                "SourceReference": "string",
+                "Owes": 0
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              },
+              "example": {
+                "Title": "string",
+                "FirstName": "string",
+                "LastName": "string",
+                "HomePhone": "string",
+                "MobilePhone": "string",
+                "EmailAddress": "string",
+                "ProfileName": "string",
+                "DateOfBirth": "string",
+                "CustomerType": 1,
+                "CustomerTypeName": "string",
+                "CustomerStatus": 0,
+                "CustomerStatusName": "string",
+                "CustomerActiveMarketingStatus": 1,
+                "CustomerActiveMarketingStatusName": "string",
+                "PaymentStatus": 1,
+                "PaymentStatusName": "string",
+                "CanAccess": true,
+                "CanOrder": true,
+                "NumDeliveries": 0,
+                "DayNumber": 0,
+                "SourceDescription": "string",
+                "SourceReference": "string",
+                "Owes": 0
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              },
+              "example": {
+                "Title": "string",
+                "FirstName": "string",
+                "LastName": "string",
+                "HomePhone": "string",
+                "MobilePhone": "string",
+                "EmailAddress": "string",
+                "ProfileName": "string",
+                "DateOfBirth": "string",
+                "CustomerType": 1,
+                "CustomerTypeName": "string",
+                "CustomerStatus": 0,
+                "CustomerStatusName": "string",
+                "CustomerActiveMarketingStatus": 1,
+                "CustomerActiveMarketingStatusName": "string",
+                "PaymentStatus": 1,
+                "PaymentStatusName": "string",
+                "CanAccess": true,
+                "CanOrder": true,
+                "NumDeliveries": 0,
+                "DayNumber": 0,
+                "SourceDescription": "string",
+                "SourceReference": "string",
+                "Owes": 0
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              },
+              "example": {
+                "Title": "string",
+                "FirstName": "string",
+                "LastName": "string",
+                "HomePhone": "string",
+                "MobilePhone": "string",
+                "EmailAddress": "string",
+                "ProfileName": "string",
+                "DateOfBirth": "string",
+                "CustomerType": 1,
+                "CustomerTypeName": "string",
+                "CustomerStatus": 0,
+                "CustomerStatusName": "string",
+                "CustomerActiveMarketingStatus": 1,
+                "CustomerActiveMarketingStatusName": "string",
+                "PaymentStatus": 1,
+                "PaymentStatusName": "string",
+                "CanAccess": true,
+                "CanOrder": true,
+                "NumDeliveries": 0,
+                "DayNumber": 0,
+                "SourceDescription": "string",
+                "SourceReference": "string",
+                "Owes": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "Title": "string",
+                  "FirstName": "string",
+                  "LastName": "string",
+                  "HomePhone": "string",
+                  "MobilePhone": "string",
+                  "EmailAddress": "string",
+                  "ProfileName": "string",
+                  "DateOfBirth": "string",
+                  "CustomerType": 1,
+                  "CustomerTypeName": "string",
+                  "CustomerStatus": 0,
+                  "CustomerStatusName": "string",
+                  "CustomerActiveMarketingStatus": 1,
+                  "CustomerActiveMarketingStatusName": "string",
+                  "PaymentStatus": 1,
+                  "PaymentStatusName": "string",
+                  "CanAccess": true,
+                  "CanOrder": true,
+                  "NumDeliveries": 0,
+                  "DayNumber": 0,
+                  "SourceDescription": "string",
+                  "SourceReference": "string",
+                  "Owes": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "Title": "string",
+                  "FirstName": "string",
+                  "LastName": "string",
+                  "HomePhone": "string",
+                  "MobilePhone": "string",
+                  "EmailAddress": "string",
+                  "ProfileName": "string",
+                  "DateOfBirth": "string",
+                  "CustomerType": 1,
+                  "CustomerTypeName": "string",
+                  "CustomerStatus": 0,
+                  "CustomerStatusName": "string",
+                  "CustomerActiveMarketingStatus": 1,
+                  "CustomerActiveMarketingStatusName": "string",
+                  "PaymentStatus": 1,
+                  "PaymentStatusName": "string",
+                  "CanAccess": true,
+                  "CanOrder": true,
+                  "NumDeliveries": 0,
+                  "DayNumber": 0,
+                  "SourceDescription": "string",
+                  "SourceReference": "string",
+                  "Owes": 0
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/dates": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Gets the customer dates.",
+        "description": "Gets the customer dates.",
+        "operationId": "GetCustomerDates",
+        "parameters": [
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Format - date-time (as date-time in RFC3339). the date to fetch to, can be left null .",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "holidayFilter",
+            "in": "query",
+            "description": "Format - int32. filter type for selecting what to fetch.",
+            "schema": {
+              "$ref": "#/components/schemas/HolidayFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDate"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDate"
+                  }
+                },
+                "example": [
+                  {
+                    "CustomerId": 0,
+                    "DeliveryDate": "string",
+                    "OnHoliday": true,
+                    "WeekCommencing": "string",
+                    "WeekEnding": "string"
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDate"
+                  }
+                },
+                "example": [
+                  {
+                    "CustomerId": 0,
+                    "DeliveryDate": "string",
+                    "OnHoliday": true,
+                    "WeekCommencing": "string",
+                    "WeekEnding": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/date/{deliveryDate}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Gets the customer date.",
+        "description": "Gets the customer date.",
+        "operationId": "GetCustomerDate",
+        "parameters": [
+          {
+            "name": "deliveryDate",
+            "in": "path",
+            "description": "Format - date-time (as date-time in RFC3339). the delivery date to fetch.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDate"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDate"
+                  }
+                },
+                "example": [
+                  {
+                    "CustomerId": 0,
+                    "DeliveryDate": "string",
+                    "OnHoliday": true,
+                    "WeekCommencing": "string",
+                    "WeekEnding": "string"
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDate"
+                  }
+                },
+                "example": [
+                  {
+                    "CustomerId": 0,
+                    "DeliveryDate": "string",
+                    "OnHoliday": true,
+                    "WeekCommencing": "string",
+                    "WeekEnding": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Puts the customer date.",
+        "description": "Puts the customer date.",
+        "operationId": "PutCustomerDate",
+        "parameters": [
+          {
+            "name": "deliveryDate",
+            "in": "path",
+            "description": "Format - date-time (as date-time in RFC3339). the delivery date to Put.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "the CustomerDate to Put.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDate"
+              },
+              "example": {
+                "CustomerId": 0,
+                "DeliveryDate": "string",
+                "OnHoliday": true,
+                "WeekCommencing": "string",
+                "WeekEnding": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDate"
+              },
+              "example": {
+                "CustomerId": 0,
+                "DeliveryDate": "string",
+                "OnHoliday": true,
+                "WeekCommencing": "string",
+                "WeekEnding": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDate"
+              },
+              "example": {
+                "CustomerId": 0,
+                "DeliveryDate": "string",
+                "OnHoliday": true,
+                "WeekCommencing": "string",
+                "WeekEnding": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDate"
+              },
+              "example": {
+                "CustomerId": 0,
+                "DeliveryDate": "string",
+                "OnHoliday": true,
+                "WeekCommencing": "string",
+                "WeekEnding": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/titles": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Gets the Titles records.",
+        "description": "Gets the Titles records.",
+        "operationId": "GetTitles",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Title"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Title"
+                  }
+                },
+                "example": [
+                  {
+                    "TitleId": 0,
+                    "TitleDescription": "string",
+                    "SpecifyOther": true,
+                    "SortIndex": 0
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Title"
+                  }
+                },
+                "example": [
+                  {
+                    "TitleId": 0,
+                    "TitleDescription": "string",
+                    "SpecifyOther": true,
+                    "SortIndex": 0
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sources": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Gets the source records.",
+        "description": "Gets the source records.",
+        "operationId": "GetSources",
+        "parameters": [
+          {
+            "name": "includeInternal",
+            "in": "query",
+            "description": "To return internal Source or not",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Source"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Source"
+                  }
+                },
+                "example": [
+                  {
+                    "SourceId": 0,
+                    "SourceDescription": "string",
+                    "DetailRequest": "string",
+                    "IsInternal": true
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Source"
+                  }
+                },
+                "example": [
+                  {
+                    "SourceId": 0,
+                    "SourceDescription": "string",
+                    "DetailRequest": "string",
+                    "IsInternal": true
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/address": {
+      "get": {
+        "tags": [
+          "CustomerAddress"
+        ],
+        "summary": "Gets the customer Address details.",
+        "description": "Gets the customer Address details.",
+        "operationId": "GetCustomerAddress",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "CustomerId": 0,
+                  "PropertyNotes": "string",
+                  "DeliveryNotes": "string",
+                  "Postcode": "string",
+                  "House": "string",
+                  "Street": "string",
+                  "Locality": "string",
+                  "Town": "string",
+                  "County": "string",
+                  "Longitude": 0,
+                  "Latitude": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "CustomerId": 0,
+                  "PropertyNotes": "string",
+                  "DeliveryNotes": "string",
+                  "Postcode": "string",
+                  "House": "string",
+                  "Street": "string",
+                  "Locality": "string",
+                  "Town": "string",
+                  "County": "string",
+                  "Longitude": 0,
+                  "Latitude": 0
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CustomerAddress"
+        ],
+        "summary": "Sets the customer Address details.",
+        "description": "Sets the customer Address details.",
+        "operationId": "SetCustomerAddress",
+        "requestBody": {
+          "description": "Address to set for the customer if customer found.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAddress"
+              },
+              "example": {
+                "CustomerId": 0,
+                "PropertyNotes": "string",
+                "DeliveryNotes": "string",
+                "Postcode": "string",
+                "House": "string",
+                "Street": "string",
+                "Locality": "string",
+                "Town": "string",
+                "County": "string",
+                "Longitude": 0,
+                "Latitude": 0
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAddress"
+              },
+              "example": {
+                "CustomerId": 0,
+                "PropertyNotes": "string",
+                "DeliveryNotes": "string",
+                "Postcode": "string",
+                "House": "string",
+                "Street": "string",
+                "Locality": "string",
+                "Town": "string",
+                "County": "string",
+                "Longitude": 0,
+                "Latitude": 0
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAddress"
+              },
+              "example": {
+                "CustomerId": 0,
+                "PropertyNotes": "string",
+                "DeliveryNotes": "string",
+                "Postcode": "string",
+                "House": "string",
+                "Street": "string",
+                "Locality": "string",
+                "Town": "string",
+                "County": "string",
+                "Longitude": 0,
+                "Latitude": 0
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAddress"
+              },
+              "example": {
+                "CustomerId": 0,
+                "PropertyNotes": "string",
+                "DeliveryNotes": "string",
+                "Postcode": "string",
+                "House": "string",
+                "Street": "string",
+                "Locality": "string",
+                "Town": "string",
+                "County": "string",
+                "Longitude": 0,
+                "Latitude": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "CustomerId": 0,
+                  "PropertyNotes": "string",
+                  "DeliveryNotes": "string",
+                  "Postcode": "string",
+                  "House": "string",
+                  "Street": "string",
+                  "Locality": "string",
+                  "Town": "string",
+                  "County": "string",
+                  "Longitude": 0,
+                  "Latitude": 0
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                },
+                "example": {
+                  "CustomerId": 0,
+                  "PropertyNotes": "string",
+                  "DeliveryNotes": "string",
+                  "Postcode": "string",
+                  "House": "string",
+                  "Street": "string",
+                  "Locality": "string",
+                  "Town": "string",
+                  "County": "string",
+                  "Longitude": 0,
+                  "Latitude": 0
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/check/up": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Check if the API has healthy connections to Database and any External connectors",
+        "description": "Check if the API has healthy connections to Database and any External connectors",
+        "operationId": "GetCheckUp",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/postcode/{postcode}": {
+      "get": {
+        "tags": [
+          "Postcode"
+        ],
+        "summary": "Gets the postcode location.",
+        "description": "Gets the postcode location.",
+        "operationId": "get-postcode-postcode",
+        "parameters": [
+          {
+            "name": "postcode",
+            "in": "path",
+            "description": "postcode to get location of.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeAddresses",
+            "in": "query",
+            "description": "Flag to indicate if addresses should be returned.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostcodeLocation"
+                },
+                "example": {
+                  "Postcode": "string",
+                  "Street": "string",
+                  "Latitude": 0,
+                  "Longitude": 0,
+                  "DeliveryDay": 0,
+                  "DeliveryDayName": "string",
+                  "DriverName": "string",
+                  "Addresses": [
+                    {
+                      "Postcode": "string",
+                      "House": "string",
+                      "Street": "string",
+                      "Locality": "string",
+                      "Town": "string",
+                      "County": "string",
+                      "Longitude": 0,
+                      "Latitude": 0
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/postcode/{postcode}/{house}": {
+      "get": {
+        "tags": [
+          "Postcode"
+        ],
+        "summary": "Gets the postcode location for a specific house.",
+        "description": "Gets the postcode location for a specific house.",
+        "operationId": "get-postcode-postcode-house",
+        "parameters": [
+          {
+            "name": "postcode",
+            "in": "path",
+            "description": "Postcode to get location of.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "house",
+            "in": "path",
+            "description": "House to get address for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostcodeLocation"
+                },
+                "example": {
+                  "Postcode": "string",
+                  "Street": "string",
+                  "Latitude": 0,
+                  "Longitude": 0,
+                  "DeliveryDay": 0,
+                  "DeliveryDayName": "string",
+                  "DriverName": "string",
+                  "Addresses": [
+                    {
+                      "Postcode": "string",
+                      "House": "string",
+                      "Street": "string",
+                      "Locality": "string",
+                      "Town": "string",
+                      "County": "string",
+                      "Longitude": 0,
+                      "Latitude": 0
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/autocomplete": {
+      "get": {
+        "tags": [
+          "Postcode"
+        ],
+        "summary": "Get Addresses by using Autocomplete functionality by providing a search term",
+        "description": "Get Addresses by using Autocomplete functionality by providing a search term",
+        "operationId": "GetAddressesAutocomplete",
+        "parameters": [
+          {
+            "name": "searchText",
+            "in": "query",
+            "description": "Search term to use for autocomplete",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "allMatches",
+            "in": "query",
+            "description": "Returns all suggestions when search term contains a postcode",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AutocompleteAddress"
+                  }
+                },
+                "example": [
+                  {
+                    "Address": "string",
+                    "Id": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/{id}": {
+      "get": {
+        "tags": [
+          "Postcode"
+        ],
+        "summary": "Get specific address by Id",
+        "description": "Get specific address by Id",
+        "operationId": "GetAddressById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the address",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                },
+                "example": {
+                  "Postcode": "string",
+                  "House": "string",
+                  "Street": "string",
+                  "Locality": "string",
+                  "Town": "string",
+                  "County": "string",
+                  "Longitude": 0,
+                  "Latitude": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preference/{preferenceId}": {
+      "get": {
+        "tags": [
+          "Preference"
+        ],
+        "summary": "Gets the preference detail",
+        "description": "Gets the preference detail",
+        "operationId": "GetPreference",
+        "parameters": [
+          {
+            "name": "preferenceId",
+            "in": "path",
+            "description": "Format - int32. Preference Id to get details of.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "example": {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "example": {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/preference/{preferenceId}": {
+      "get": {
+        "tags": [
+          "Preference"
+        ],
+        "summary": "Gets the customer preference detail",
+        "description": "Gets the customer preference detail",
+        "operationId": "GetCustomerPreference",
+        "parameters": [
+          {
+            "name": "preferenceId",
+            "in": "path",
+            "description": "Format - int32. Preference Id to get details of.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "example": {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "example": {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences": {
+      "get": {
+        "tags": [
+          "Preference"
+        ],
+        "summary": "Gets all the preferences.",
+        "description": "Gets all the preferences.",
+        "operationId": "GetPreferences",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "example": [
+                  {
+                    "PreferenceId": 0,
+                    "PreferenceName": "string",
+                    "PreferenceQuestion": "string",
+                    "MultiSelect": true,
+                    "SortIndex": 0,
+                    "Options": [
+                      {
+                        "OptionId": 0,
+                        "PreferenceId": 0,
+                        "OptionDescription": "string",
+                        "Selected": true,
+                        "SortIndex": 0,
+                        "IsDefault": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "example": [
+                  {
+                    "PreferenceId": 0,
+                    "PreferenceName": "string",
+                    "PreferenceQuestion": "string",
+                    "MultiSelect": true,
+                    "SortIndex": 0,
+                    "Options": [
+                      {
+                        "OptionId": 0,
+                        "PreferenceId": 0,
+                        "OptionDescription": "string",
+                        "Selected": true,
+                        "SortIndex": 0,
+                        "IsDefault": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/preferences": {
+      "get": {
+        "tags": [
+          "Preference"
+        ],
+        "summary": "Gets all the preferences.",
+        "description": "Gets all the preferences.",
+        "operationId": "GetCustomerPreferences",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "example": [
+                  {
+                    "PreferenceId": 0,
+                    "PreferenceName": "string",
+                    "PreferenceQuestion": "string",
+                    "MultiSelect": true,
+                    "SortIndex": 0,
+                    "Options": [
+                      {
+                        "OptionId": 0,
+                        "PreferenceId": 0,
+                        "OptionDescription": "string",
+                        "Selected": true,
+                        "SortIndex": 0,
+                        "IsDefault": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "example": [
+                  {
+                    "PreferenceId": 0,
+                    "PreferenceName": "string",
+                    "PreferenceQuestion": "string",
+                    "MultiSelect": true,
+                    "SortIndex": 0,
+                    "Options": [
+                      {
+                        "OptionId": 0,
+                        "PreferenceId": 0,
+                        "OptionDescription": "string",
+                        "Selected": true,
+                        "SortIndex": 0,
+                        "IsDefault": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Preference"
+        ],
+        "summary": "Updates the preference details.",
+        "description": "Updates the preference details.",
+        "operationId": "SetCustomerPreferences",
+        "requestBody": {
+          "description": "Preference information to be updated.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Preference"
+                }
+              },
+              "example": [
+                {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Preference"
+                }
+              },
+              "example": [
+                {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Preference"
+                }
+              },
+              "example": [
+                {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Preference"
+                }
+              },
+              "example": [
+                {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "example": [
+                  {
+                    "PreferenceId": 0,
+                    "PreferenceName": "string",
+                    "PreferenceQuestion": "string",
+                    "MultiSelect": true,
+                    "SortIndex": 0,
+                    "Options": [
+                      {
+                        "OptionId": 0,
+                        "PreferenceId": 0,
+                        "OptionDescription": "string",
+                        "Selected": true,
+                        "SortIndex": 0,
+                        "IsDefault": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Preference"
+                  }
+                },
+                "example": [
+                  {
+                    "PreferenceId": 0,
+                    "PreferenceName": "string",
+                    "PreferenceQuestion": "string",
+                    "MultiSelect": true,
+                    "SortIndex": 0,
+                    "Options": [
+                      {
+                        "OptionId": 0,
+                        "PreferenceId": 0,
+                        "OptionDescription": "string",
+                        "Selected": true,
+                        "SortIndex": 0,
+                        "IsDefault": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/preference": {
+      "put": {
+        "tags": [
+          "Preference"
+        ],
+        "summary": "Updates the preference details.",
+        "description": "Updates the preference details.",
+        "operationId": "SetCustomerPreference",
+        "requestBody": {
+          "description": "Preference information to be updated.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Preference"
+              },
+              "example": {
+                "PreferenceId": 0,
+                "PreferenceName": "string",
+                "PreferenceQuestion": "string",
+                "MultiSelect": true,
+                "SortIndex": 0,
+                "Options": [
+                  {
+                    "OptionId": 0,
+                    "PreferenceId": 0,
+                    "OptionDescription": "string",
+                    "Selected": true,
+                    "SortIndex": 0,
+                    "IsDefault": true
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Preference"
+              },
+              "example": {
+                "PreferenceId": 0,
+                "PreferenceName": "string",
+                "PreferenceQuestion": "string",
+                "MultiSelect": true,
+                "SortIndex": 0,
+                "Options": [
+                  {
+                    "OptionId": 0,
+                    "PreferenceId": 0,
+                    "OptionDescription": "string",
+                    "Selected": true,
+                    "SortIndex": 0,
+                    "IsDefault": true
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Preference"
+              },
+              "example": {
+                "PreferenceId": 0,
+                "PreferenceName": "string",
+                "PreferenceQuestion": "string",
+                "MultiSelect": true,
+                "SortIndex": 0,
+                "Options": [
+                  {
+                    "OptionId": 0,
+                    "PreferenceId": 0,
+                    "OptionDescription": "string",
+                    "Selected": true,
+                    "SortIndex": 0,
+                    "IsDefault": true
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Preference"
+              },
+              "example": {
+                "PreferenceId": 0,
+                "PreferenceName": "string",
+                "PreferenceQuestion": "string",
+                "MultiSelect": true,
+                "SortIndex": 0,
+                "Options": [
+                  {
+                    "OptionId": 0,
+                    "PreferenceId": 0,
+                    "OptionDescription": "string",
+                    "Selected": true,
+                    "SortIndex": 0,
+                    "IsDefault": true
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "example": {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preference"
+                },
+                "example": {
+                  "PreferenceId": 0,
+                  "PreferenceName": "string",
+                  "PreferenceQuestion": "string",
+                  "MultiSelect": true,
+                  "SortIndex": 0,
+                  "Options": [
+                    {
+                      "OptionId": 0,
+                      "PreferenceId": 0,
+                      "OptionDescription": "string",
+                      "Selected": true,
+                      "SortIndex": 0,
+                      "IsDefault": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/reminders": {
+      "get": {
+        "tags": [
+          "Reminders"
+        ],
+        "summary": "Returns all Reminders for specified customer.",
+        "description": "Returns all Reminders for specified customer.",
+        "operationId": "GetCustomerReminders",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerReminder"
+                  }
+                },
+                "example": [
+                  {
+                    "CustomerId": 0,
+                    "ReminderType": 1,
+                    "ReminderTypeName": "string",
+                    "ReminderPeriod": 1,
+                    "ReminderPeriodName": "string",
+                    "ReminderTime": 1,
+                    "ReminderTimeName": "string",
+                    "Links": [
+                      {
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/reminder/{reminderType}": {
+      "get": {
+        "tags": [
+          "Reminders"
+        ],
+        "summary": "Returns a reminder for a specified customer and reminder type",
+        "description": "Returns a reminder for a specified customer and reminder type",
+        "operationId": "GetCustomerReminder",
+        "parameters": [
+          {
+            "name": "reminderType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerReminder"
+                },
+                "example": {
+                  "CustomerId": 0,
+                  "ReminderType": 1,
+                  "ReminderTypeName": "string",
+                  "ReminderPeriod": 1,
+                  "ReminderPeriodName": "string",
+                  "ReminderTime": 1,
+                  "ReminderTimeName": "string",
+                  "Links": [
+                    {
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reminders"
+        ],
+        "summary": "Updates values for specified CustomerReminder.",
+        "description": "Sample Request:\r\n\r\n    PUT\r\n    {\r\n        \"customerId\": 25421,\r\n        \"reminderType\": DeadlineSMS,\r\n        \"period\": 1,\r\n        \"time\": 2\r\n    }\r\n    \r\nReminderPeriods: 1 = Never, 2 = On Deadline Day, 3 = Day Before Deadline, 4 = Two Days Before Deadline\r\nReminderTimes: 1 = 7am, 2 = 12pm, 3 = 3pm (inactive), 4 = 5pm, 5 = 10pm",
+        "operationId": "PutCustomerReminder",
+        "parameters": [
+          {
+            "name": "reminderType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerReminder"
+              },
+              "example": {
+                "CustomerId": 0,
+                "ReminderType": 1,
+                "ReminderTypeName": "string",
+                "ReminderPeriod": 1,
+                "ReminderPeriodName": "string",
+                "ReminderTime": 1,
+                "ReminderTimeName": "string",
+                "Links": [
+                  {
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerReminder"
+              },
+              "example": {
+                "CustomerId": 0,
+                "ReminderType": 1,
+                "ReminderTypeName": "string",
+                "ReminderPeriod": 1,
+                "ReminderPeriodName": "string",
+                "ReminderTime": 1,
+                "ReminderTimeName": "string",
+                "Links": [
+                  {
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerReminder"
+              },
+              "example": {
+                "CustomerId": 0,
+                "ReminderType": 1,
+                "ReminderTypeName": "string",
+                "ReminderPeriod": 1,
+                "ReminderPeriodName": "string",
+                "ReminderTime": 1,
+                "ReminderTimeName": "string",
+                "Links": [
+                  {
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerReminder"
+              },
+              "example": {
+                "CustomerId": 0,
+                "ReminderType": 1,
+                "ReminderTypeName": "string",
+                "ReminderPeriod": 1,
+                "ReminderPeriodName": "string",
+                "ReminderTime": 1,
+                "ReminderTimeName": "string",
+                "Links": [
+                  {
+                    "Href": "string",
+                    "Rel": "string",
+                    "Method": "string"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated item.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerReminder"
+                },
+                "example": {
+                  "CustomerId": 0,
+                  "ReminderType": 1,
+                  "ReminderTypeName": "string",
+                  "ReminderPeriod": 1,
+                  "ReminderPeriodName": "string",
+                  "ReminderTime": 1,
+                  "ReminderTimeName": "string",
+                  "Links": [
+                    {
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item matching this Id could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/password": {
+      "patch": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Update the customers password",
+        "description": "Update the customers password",
+        "operationId": "UpdateCustomerPassword",
+        "requestBody": {
+          "description": "ACCustomer.Core.Requests.CustomerChangePasswordRequest",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerChangePasswordRequest"
+              },
+              "example": {
+                "NewPassword": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerChangePasswordRequest"
+              },
+              "example": {
+                "NewPassword": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerChangePasswordRequest"
+              },
+              "example": {
+                "NewPassword": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerChangePasswordRequest"
+              },
+              "example": {
+                "NewPassword": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/paymentmethod/token": {
+      "get": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "summary": "Gets the customer's active PaymentToken by CustomerId.",
+        "description": "Gets the customer's active PaymentToken by CustomerId.",
+        "operationId": "GetActivePaymentToken",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentToken"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentToken"
+                },
+                "example": {
+                  "PaymentTokenId": 0,
+                  "CustomerId": 0,
+                  "PaymentTokenStatus": 1,
+                  "ObscuredPaymentNumber": "string",
+                  "HolderFullName": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentToken"
+                },
+                "example": {
+                  "PaymentTokenId": 0,
+                  "CustomerId": 0,
+                  "PaymentTokenStatus": 1,
+                  "ObscuredPaymentNumber": "string",
+                  "HolderFullName": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/customer/paymentmethod/clienttoken": {
+      "post": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "summary": "Gets the customer's clienttoken from braintree and creates if it it doesn't exist.",
+        "description": "Gets the customer's clienttoken from braintree and creates if it it doesn't exist.",
+        "operationId": "PostClientToken",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BTClientToken"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BTClientToken"
+                },
+                "example": {
+                  "ClientToken": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BTClientToken"
+                },
+                "example": {
+                  "ClientToken": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "Type": "string",
+                  "Title": "string",
+                  "Status": 0,
+                  "Detail": "string",
+                  "Instance": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/subscriber": {
+      "post": {
+        "tags": [
+          "Subscriber"
+        ],
+        "summary": "Subscribe an email address to our newsletter",
+        "description": "Subscribe an email address to our newsletter",
+        "operationId": "Subscribe",
+        "requestBody": {
+          "description": "ACCustomer.Core.Models.Subscriber to subscribe to our newsletter",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscriber"
+              },
+              "example": {
+                "EmailAddress": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscriber"
+              },
+              "example": {
+                "EmailAddress": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscriber"
+              },
+              "example": {
+                "EmailAddress": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscriber"
+              },
+              "example": {
+                "EmailAddress": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "Postcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "House": {
+            "type": "string",
+            "nullable": true
+          },
+          "Street": {
+            "type": "string",
+            "nullable": true
+          },
+          "Locality": {
+            "type": "string",
+            "nullable": true
+          },
+          "Town": {
+            "type": "string",
+            "nullable": true
+          },
+          "County": {
+            "type": "string",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AutocompleteAddress": {
+        "type": "object",
+        "properties": {
+          "Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "Id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BTClientToken": {
+        "type": "object",
+        "properties": {
+          "ClientToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "FirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "HomePhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "MobilePhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "EmailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProfileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CustomerType": {
+            "$ref": "#/components/schemas/CustomerType"
+          },
+          "CustomerTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CustomerStatus": {
+            "$ref": "#/components/schemas/CustomerStatus"
+          },
+          "CustomerStatusName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CustomerActiveMarketingStatus": {
+            "$ref": "#/components/schemas/CustomerActiveMarketingStatus"
+          },
+          "CustomerActiveMarketingStatusName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "PaymentStatus": {
+            "$ref": "#/components/schemas/PaymentStatus"
+          },
+          "PaymentStatusName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CanAccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "CanOrder": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "NumDeliveries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DayNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SourceDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "SourceReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "Owes": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerActiveMarketingStatus": {
+        "enum": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CustomerAddress": {
+        "type": "object",
+        "properties": {
+          "CustomerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PropertyNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "DeliveryNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "Postcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "House": {
+            "type": "string",
+            "nullable": true
+          },
+          "Street": {
+            "type": "string",
+            "nullable": true
+          },
+          "Locality": {
+            "type": "string",
+            "nullable": true
+          },
+          "Town": {
+            "type": "string",
+            "nullable": true
+          },
+          "County": {
+            "type": "string",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerChangePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "NewPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerDate": {
+        "type": "object",
+        "properties": {
+          "CustomerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DeliveryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "OnHoliday": {
+            "type": "boolean"
+          },
+          "WeekCommencing": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "WeekEnding": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerReminder": {
+        "type": "object",
+        "properties": {
+          "CustomerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ReminderType": {
+            "$ref": "#/components/schemas/ReminderType"
+          },
+          "ReminderTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ReminderPeriod": {
+            "$ref": "#/components/schemas/ReminderPeriod"
+          },
+          "ReminderPeriodName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ReminderTime": {
+            "$ref": "#/components/schemas/ReminderTime"
+          },
+          "ReminderTimeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CustomerType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "HolidayFilter": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "Href": {
+            "type": "string",
+            "nullable": true
+          },
+          "Rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Option": {
+        "type": "object",
+        "properties": {
+          "OptionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PreferenceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OptionDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "Selected": {
+            "type": "boolean"
+          },
+          "SortIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "IsDefault": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentStatus": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PaymentToken": {
+        "type": "object",
+        "properties": {
+          "PaymentTokenId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CustomerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PaymentTokenStatus": {
+            "$ref": "#/components/schemas/PaymentTokenStatus"
+          },
+          "ObscuredPaymentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "HolderFullName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentTokenStatus": {
+        "enum": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PostcodeLocation": {
+        "type": "object",
+        "properties": {
+          "Postcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Street": {
+            "type": "string",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DeliveryDay": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "DeliveryDayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "DriverName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Preference": {
+        "type": "object",
+        "properties": {
+          "PreferenceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PreferenceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PreferenceQuestion": {
+            "type": "string",
+            "nullable": true
+          },
+          "MultiSelect": {
+            "type": "boolean"
+          },
+          "SortIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Option"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "ReminderPeriod": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ReminderTime": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ReminderType": {
+        "enum": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SingleAuthKeyRequest": {
+        "type": "object",
+        "properties": {
+          "PagePath": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleAuthKeyResponse": {
+        "type": "object",
+        "properties": {
+          "PagePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "KeyIdentifier": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ExpiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Source": {
+        "type": "object",
+        "properties": {
+          "SourceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SourceDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "DetailRequest": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsInternal": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Subscriber": {
+        "type": "object",
+        "properties": {
+          "EmailAddress": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Title": {
+        "type": "object",
+        "properties": {
+          "TitleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TitleDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "SpecifyOther": {
+            "type": "boolean"
+          },
+          "SortIndex": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ]
+}

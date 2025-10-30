@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Reviews API",
+    "description": "API that returns product reviews",
+    "version": "v1"
+  },
+  "servers": [{
+    "url": "https://apigw-test.abelandcole.co.uk/reviews/v1"
+  }],
+  "paths": {
+    "/products/{id}/reviews": {
+      "get": {
+        "tags": ["Reviews.API"],
+        "summary": "GetProductReviews",
+        "description": "Gets all reviews for a given product.",
+        "operationId": "GetProductReviews",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "limit",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "offset",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "sortOrder",
+          "in": "query",
+          "schema": {
+            "$ref": "#/components/schemas/ReviewSortOrder"
+          }
+        }, {
+          "name": "isTextOnly",
+          "in": "query",
+          "schema": {
+            "type": "boolean"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductReviews"
+                },
+                "example": {
+                  "statistics": {
+                    "totalReviewCount": 0,
+                    "averageRating": 0,
+                    "ratingDistribution": [{
+                      "rating": 0,
+                      "count": 0
+                    }],
+                    "reviewsWithText": 0
+                  },
+                  "reviews": [{
+                    "id": "string",
+                    "reviewId": "string",
+                    "lastModeratedTime": "string",
+                    "lastModificationTime": "string",
+                    "productId": "string",
+                    "moderatorResponses": [{
+                      "responseText": "string",
+                      "moderatorName": "string",
+                      "responseDate": "string"
+                    }],
+                    "authorId": "string",
+                    "rating": 0,
+                    "isRatingsOnly": true,
+                    "moderationStatus": "Submitted",
+                    "submissionTime": "string",
+                    "reviewText": "string",
+                    "title": "string",
+                    "userNickname": "string",
+                    "ratingRange": 0,
+                    "badges": ["string"],
+                    "familyId": "string"
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Client error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ModerationStatus": {
+        "enum": ["Submitted", "Approved", "Rejected", "Removed"],
+        "type": "string",
+        "format": ""
+      },
+      "ModeratorResponse": {
+        "type": "object",
+        "properties": {
+          "responseText": {
+            "type": "string",
+            "nullable": true
+          },
+          "moderatorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductReviews": {
+        "type": "object",
+        "properties": {
+          "statistics": {
+            "$ref": "#/components/schemas/ReviewStatistics"
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RatingDistribution": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "reviewId": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModeratedTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModificationTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "productId": {
+            "type": "string",
+            "nullable": true
+          },
+          "moderatorResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModeratorResponse"
+            },
+            "nullable": true
+          },
+          "authorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isRatingsOnly": {
+            "type": "boolean"
+          },
+          "moderationStatus": {
+            "$ref": "#/components/schemas/ModerationStatus"
+          },
+          "submissionTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewText": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "userNickname": {
+            "type": "string",
+            "nullable": true
+          },
+          "ratingRange": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "badges": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "familyId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewSortOrder": {
+        "enum": ["ModificationTimeDescending", "ModificationTimeAscending", "RatingDescending", "RatingAscending"],
+        "type": "string",
+        "format": ""
+      },
+      "ReviewStatistics": {
+        "type": "object",
+        "properties": {
+          "totalReviewCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "averageRating": {
+            "type": "number",
+            "format": "double"
+          },
+          "ratingDistribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RatingDistribution"
+            },
+            "nullable": true
+          },
+          "reviewsWithText": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }, {
+    "apiKeyQuery": []
+  }]
+}

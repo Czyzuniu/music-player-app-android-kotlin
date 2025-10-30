@@ -40,13 +40,13 @@ android {
         }
     }
 
-    namespace = "com.example.abelandcoleandroidnativeapp"
+    namespace = "com.example.spotifyclone"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.abelandcoleandroidnativeapp"
+        applicationId = "com.example.spotifyClone"
         minSdk = 28
         targetSdk = 36
         versionCode = 1
@@ -87,6 +87,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.navigation.compose)
+
+//    implementation(project(":customer-api"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

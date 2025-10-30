@@ -1,0 +1,4203 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ACProductAPI V3",
+    "description": "API that returns products",
+    "version": "v3"
+  },
+  "servers": [{
+    "url": "https://apigw-test.abelandcole.co.uk/product/v3"
+  }],
+  "paths": {
+    "/check/up": {
+      "get": {
+        "tags": ["HealthCheck"],
+        "summary": "GetCheckUp",
+        "operationId": "GetCheckUp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/index": {
+      "get": {
+        "tags": ["Index"],
+        "summary": "Search for the index of a url",
+        "description": "This will search against Products and then against MenuItems should no product be found. If no menuId is provided\r\nthen a configured default will be used\r\n\r\nSample Requests:\r\n\r\n    GET /index?url=geranium-grapefruit-cleansing-hand-wash-bio-d-5l\r\n    \r\n    GET /index?url=household\r\n    \r\n    GET /index?url=household&menuId=45\r\n    \r\n    GET /index?url=household/flowers-plants&menuId=45\r\n    \r\n    GET /index?url=household/flowers-plants/seeds&menuId=45\r\n    \r\n    GET /index?url=household/flowers-plants/seeds_plants&menuId=45",
+        "operationId": "SearchIndex",
+        "parameters": [{
+          "name": "url",
+          "in": "query",
+          "description": "Friendly Url to be used as search term",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "menuId",
+          "in": "query",
+          "description": "Format - int32. Optional menuId to search in should the search be for a Menu Item",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndexResultResponse"
+                },
+                "example": {
+                  "Result": {
+                    "EntityType": 0,
+                    "EntityTypeName": "string",
+                    "EntityId": "string",
+                    "Filters": "string"
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid, refer to message for information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndexResultResponse"
+                },
+                "example": {
+                  "Result": {
+                    "EntityType": 0,
+                    "EntityTypeName": "string",
+                    "EntityId": "string",
+                    "Filters": "string"
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Index not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndexResultResponse"
+                },
+                "example": {
+                  "Result": {
+                    "EntityType": 0,
+                    "EntityTypeName": "string",
+                    "EntityId": "string",
+                    "Filters": "string"
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu": {
+      "get": {
+        "tags": ["Menu"],
+        "summary": "Returns menu structure for default menu with specified num levels.",
+        "description": "Returns menu structure for default menu with specified num levels.",
+        "operationId": "GetDefaultMenu",
+        "parameters": [{
+          "name": "levels",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/{menuId}": {
+      "get": {
+        "tags": ["Menu"],
+        "summary": "Returns menu structure for specified or default menu with specified or all \r\n                     levels.",
+        "description": "Returns menu structure for specified or default menu with specified or all \r\n                     levels.",
+        "operationId": "GetMenu",
+        "parameters": [{
+          "name": "menuId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "levels",
+          "in": "query",
+          "description": "Format - int32.",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menuitem/{menuItemId}": {
+      "get": {
+        "tags": ["Menu"],
+        "summary": "Returns menu item with all products in that item plus sub menus used \r\n                     for filtering. Use delivery date and \"product\" expand options to retrieve\r\n                     product information without needing a second api call. You can also expand on\r\n                     \"assets\" to ",
+        "description": "Returns menu item with all products in that item plus sub menus used \r\n                     for filtering. Use delivery date and \"product\" expand options to retrieve\r\n                     product information without needing a second api call. You can also expand on\r\n                     \"assets\" to get icons and stickers for all products.",
+        "operationId": "GetMenuItem",
+        "parameters": [{
+          "name": "menuItemId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "includeChildren",
+          "in": "query",
+          "schema": {
+            "type": "boolean",
+            "default": false
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuItemResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuItemResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/cache": {
+      "delete": {
+        "tags": ["Menu"],
+        "summary": "Deletes menu cache.",
+        "description": "Deletes menu cache.",
+        "operationId": "DeleteMenuCache",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menuitem/cache": {
+      "delete": {
+        "tags": ["Menu"],
+        "summary": "Deletes menu item cache.",
+        "description": "Deletes menu item cache.",
+        "operationId": "DeleteMenuItemCache",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menuitem/product/cache": {
+      "delete": {
+        "tags": ["Menu"],
+        "summary": "Deletes menu item product cache.",
+        "description": "Deletes menu item product cache.",
+        "operationId": "DeleteMenuProductCache",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                },
+                "example": {
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offer/{offerId}": {
+      "get": {
+        "tags": ["Offer"],
+        "summary": "Returns offer information for an offer id.",
+        "description": "Sample Request:\r\n\r\n    GET /offer/{offerId:int}\r\n    \r\nExpand behaviour:\r\n\r\n    Include the Expand Operator in the query string to add additional fields to the Offer object returned.\r\n    \r\n    Example:\r\n    \r\n    GET /offer/{offerId:int}?expand=offercategories\r\n    \r\n    Offer object returned will be populated with arrays of categories which saves a second request being made to the other endpoints.",
+        "operationId": "GetOffer",
+        "parameters": [{
+          "name": "offerId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Offer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferResponse"
+                },
+                "example": {
+                  "Result": {
+                    "OfferId": 0,
+                    "OfferDescription": "string",
+                    "OfferStrapline": "string",
+                    "ContentURL": "string",
+                    "FriendlyURL": "string",
+                    "StickerURL": "string",
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "NumberOfCategories": 0,
+                    "OfferCategories": [{
+                      "OfferCategoryId": 0,
+                      "OfferId": 0,
+                      "CategoryName": "string",
+                      "CategoryTitle": "string",
+                      "QualificationType": 1,
+                      "QualificationTypeName": "string",
+                      "QualificationValue": 0,
+                      "SortIndex": 0,
+                      "OfferProducts": [{
+                        "OfferProductId": 0,
+                        "ProductId": 0,
+                        "Product": {
+                          "ProductId": 0,
+                          "ShortCode": "string",
+                          "ProductTypeName": "string",
+                          "ProductType": 1,
+                          "DeliveryDate": "string",
+                          "ProductName": "string",
+                          "ProductBrand": "string",
+                          "ProductSize": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "OfferId": 0,
+                          "ProductURL": "string",
+                          "ImageName": "string",
+                          "PortraitImageName": "string",
+                          "BoxRecipeId": 0,
+                          "WebComment": "string",
+                          "AverageWeight": 0,
+                          "DefaultFrequencyId": 0,
+                          "FrequencyRestriction": 0,
+                          "FrequencyRestrictionName": "string",
+                          "DayNumber": 0,
+                          "AvailabilityMessage": "string",
+                          "NoOrder": true,
+                          "Rating": 0,
+                          "Reviews": 0,
+                          "NextAvailableDate": "string",
+                          "PreOrder": true,
+                          "InfoTypeId": 0,
+                          "InfoText": "string",
+                          "Descriptions": [{
+                            "TypeId": 0,
+                            "TypeName": "string",
+                            "Description": "string",
+                            "SortIndex": 0
+                          }],
+                          "Dates": [{
+                            "DeliveryDate": "string",
+                            "Available": true,
+                            "Remaining": 0,
+                            "Price": 0,
+                            "PricePerUnit": "string",
+                            "OfferPrice": 0,
+                            "OfferComment": "string",
+                            "BoxRecipeId": 0,
+                            "ProductName": "string",
+                            "ImageName": "string",
+                            "DayNumber": 0,
+                            "ProductId": 0
+                          }],
+                          "Media": [{
+                            "EntityMediaId": 0,
+                            "SortOrder": 0,
+                            "MediaType": 1,
+                            "URI": "string",
+                            "MediaTypeName": "string"
+                          }],
+                          "Assets": [{
+                            "AssetType": 1,
+                            "AssetTypeName": "string",
+                            "AssetId": 0,
+                            "AssetName": "string",
+                            "AssetURL": "string",
+                            "Links": [{
+                              "Href": "string",
+                              "Rel": "string",
+                              "Method": "string"
+                            }]
+                          }],
+                          "Frequencies": [{
+                            "Id": 0,
+                            "Name": "string",
+                            "Description": "string"
+                          }],
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        },
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      }],
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No offer with this id was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferResponse"
+                },
+                "example": {
+                  "Result": {
+                    "OfferId": 0,
+                    "OfferDescription": "string",
+                    "OfferStrapline": "string",
+                    "ContentURL": "string",
+                    "FriendlyURL": "string",
+                    "StickerURL": "string",
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "NumberOfCategories": 0,
+                    "OfferCategories": [{
+                      "OfferCategoryId": 0,
+                      "OfferId": 0,
+                      "CategoryName": "string",
+                      "CategoryTitle": "string",
+                      "QualificationType": 1,
+                      "QualificationTypeName": "string",
+                      "QualificationValue": 0,
+                      "SortIndex": 0,
+                      "OfferProducts": [{
+                        "OfferProductId": 0,
+                        "ProductId": 0,
+                        "Product": {
+                          "ProductId": 0,
+                          "ShortCode": "string",
+                          "ProductTypeName": "string",
+                          "ProductType": 1,
+                          "DeliveryDate": "string",
+                          "ProductName": "string",
+                          "ProductBrand": "string",
+                          "ProductSize": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "OfferId": 0,
+                          "ProductURL": "string",
+                          "ImageName": "string",
+                          "PortraitImageName": "string",
+                          "BoxRecipeId": 0,
+                          "WebComment": "string",
+                          "AverageWeight": 0,
+                          "DefaultFrequencyId": 0,
+                          "FrequencyRestriction": 0,
+                          "FrequencyRestrictionName": "string",
+                          "DayNumber": 0,
+                          "AvailabilityMessage": "string",
+                          "NoOrder": true,
+                          "Rating": 0,
+                          "Reviews": 0,
+                          "NextAvailableDate": "string",
+                          "PreOrder": true,
+                          "InfoTypeId": 0,
+                          "InfoText": "string",
+                          "Descriptions": [{
+                            "TypeId": 0,
+                            "TypeName": "string",
+                            "Description": "string",
+                            "SortIndex": 0
+                          }],
+                          "Dates": [{
+                            "DeliveryDate": "string",
+                            "Available": true,
+                            "Remaining": 0,
+                            "Price": 0,
+                            "PricePerUnit": "string",
+                            "OfferPrice": 0,
+                            "OfferComment": "string",
+                            "BoxRecipeId": 0,
+                            "ProductName": "string",
+                            "ImageName": "string",
+                            "DayNumber": 0,
+                            "ProductId": 0
+                          }],
+                          "Media": [{
+                            "EntityMediaId": 0,
+                            "SortOrder": 0,
+                            "MediaType": 1,
+                            "URI": "string",
+                            "MediaTypeName": "string"
+                          }],
+                          "Assets": [{
+                            "AssetType": 1,
+                            "AssetTypeName": "string",
+                            "AssetId": 0,
+                            "AssetName": "string",
+                            "AssetURL": "string",
+                            "Links": [{
+                              "Href": "string",
+                              "Rel": "string",
+                              "Method": "string"
+                            }]
+                          }],
+                          "Frequencies": [{
+                            "Id": 0,
+                            "Name": "string",
+                            "Description": "string"
+                          }],
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        },
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      }],
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offers/{deliveryDate}": {
+      "get": {
+        "tags": ["Offer"],
+        "summary": "Returns offers for date for specified",
+        "description": "# Sample Request\r\nGET /offers",
+        "operationId": "GetOffers",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "path",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Offers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OffersResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "OfferId": 0,
+                    "OfferDescription": "string",
+                    "OfferStrapline": "string",
+                    "ContentURL": "string",
+                    "FriendlyURL": "string",
+                    "StickerURL": "string",
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "NumberOfCategories": 0,
+                    "OfferCategories": [{
+                      "OfferCategoryId": 0,
+                      "OfferId": 0,
+                      "CategoryName": "string",
+                      "CategoryTitle": "string",
+                      "QualificationType": 1,
+                      "QualificationTypeName": "string",
+                      "QualificationValue": 0,
+                      "SortIndex": 0,
+                      "OfferProducts": [{
+                        "OfferProductId": 0,
+                        "ProductId": 0,
+                        "Product": {
+                          "ProductId": 0,
+                          "ShortCode": "string",
+                          "ProductTypeName": "string",
+                          "ProductType": 1,
+                          "DeliveryDate": "string",
+                          "ProductName": "string",
+                          "ProductBrand": "string",
+                          "ProductSize": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "OfferId": 0,
+                          "ProductURL": "string",
+                          "ImageName": "string",
+                          "PortraitImageName": "string",
+                          "BoxRecipeId": 0,
+                          "WebComment": "string",
+                          "AverageWeight": 0,
+                          "DefaultFrequencyId": 0,
+                          "FrequencyRestriction": 0,
+                          "FrequencyRestrictionName": "string",
+                          "DayNumber": 0,
+                          "AvailabilityMessage": "string",
+                          "NoOrder": true,
+                          "Rating": 0,
+                          "Reviews": 0,
+                          "NextAvailableDate": "string",
+                          "PreOrder": true,
+                          "InfoTypeId": 0,
+                          "InfoText": "string",
+                          "Descriptions": [{
+                            "TypeId": 0,
+                            "TypeName": "string",
+                            "Description": "string",
+                            "SortIndex": 0
+                          }],
+                          "Dates": [{
+                            "DeliveryDate": "string",
+                            "Available": true,
+                            "Remaining": 0,
+                            "Price": 0,
+                            "PricePerUnit": "string",
+                            "OfferPrice": 0,
+                            "OfferComment": "string",
+                            "BoxRecipeId": 0,
+                            "ProductName": "string",
+                            "ImageName": "string",
+                            "DayNumber": 0,
+                            "ProductId": 0
+                          }],
+                          "Media": [{
+                            "EntityMediaId": 0,
+                            "SortOrder": 0,
+                            "MediaType": 1,
+                            "URI": "string",
+                            "MediaTypeName": "string"
+                          }],
+                          "Assets": [{
+                            "AssetType": 1,
+                            "AssetTypeName": "string",
+                            "AssetId": 0,
+                            "AssetName": "string",
+                            "AssetURL": "string",
+                            "Links": [{
+                              "Href": "string",
+                              "Rel": "string",
+                              "Method": "string"
+                            }]
+                          }],
+                          "Frequencies": [{
+                            "Id": 0,
+                            "Name": "string",
+                            "Description": "string"
+                          }],
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        },
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      }],
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No offers for this date were found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OffersResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "OfferId": 0,
+                    "OfferDescription": "string",
+                    "OfferStrapline": "string",
+                    "ContentURL": "string",
+                    "FriendlyURL": "string",
+                    "StickerURL": "string",
+                    "ValidFrom": "string",
+                    "ValidTo": "string",
+                    "NumberOfCategories": 0,
+                    "OfferCategories": [{
+                      "OfferCategoryId": 0,
+                      "OfferId": 0,
+                      "CategoryName": "string",
+                      "CategoryTitle": "string",
+                      "QualificationType": 1,
+                      "QualificationTypeName": "string",
+                      "QualificationValue": 0,
+                      "SortIndex": 0,
+                      "OfferProducts": [{
+                        "OfferProductId": 0,
+                        "ProductId": 0,
+                        "Product": {
+                          "ProductId": 0,
+                          "ShortCode": "string",
+                          "ProductTypeName": "string",
+                          "ProductType": 1,
+                          "DeliveryDate": "string",
+                          "ProductName": "string",
+                          "ProductBrand": "string",
+                          "ProductSize": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "OfferId": 0,
+                          "ProductURL": "string",
+                          "ImageName": "string",
+                          "PortraitImageName": "string",
+                          "BoxRecipeId": 0,
+                          "WebComment": "string",
+                          "AverageWeight": 0,
+                          "DefaultFrequencyId": 0,
+                          "FrequencyRestriction": 0,
+                          "FrequencyRestrictionName": "string",
+                          "DayNumber": 0,
+                          "AvailabilityMessage": "string",
+                          "NoOrder": true,
+                          "Rating": 0,
+                          "Reviews": 0,
+                          "NextAvailableDate": "string",
+                          "PreOrder": true,
+                          "InfoTypeId": 0,
+                          "InfoText": "string",
+                          "Descriptions": [{
+                            "TypeId": 0,
+                            "TypeName": "string",
+                            "Description": "string",
+                            "SortIndex": 0
+                          }],
+                          "Dates": [{
+                            "DeliveryDate": "string",
+                            "Available": true,
+                            "Remaining": 0,
+                            "Price": 0,
+                            "PricePerUnit": "string",
+                            "OfferPrice": 0,
+                            "OfferComment": "string",
+                            "BoxRecipeId": 0,
+                            "ProductName": "string",
+                            "ImageName": "string",
+                            "DayNumber": 0,
+                            "ProductId": 0
+                          }],
+                          "Media": [{
+                            "EntityMediaId": 0,
+                            "SortOrder": 0,
+                            "MediaType": 1,
+                            "URI": "string",
+                            "MediaTypeName": "string"
+                          }],
+                          "Assets": [{
+                            "AssetType": 1,
+                            "AssetTypeName": "string",
+                            "AssetId": 0,
+                            "AssetName": "string",
+                            "AssetURL": "string",
+                            "Links": [{
+                              "Href": "string",
+                              "Rel": "string",
+                              "Method": "string"
+                            }]
+                          }],
+                          "Frequencies": [{
+                            "Id": 0,
+                            "Name": "string",
+                            "Description": "string"
+                          }],
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        },
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      }],
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offer/{offerId}/categories": {
+      "get": {
+        "tags": ["Offer"],
+        "summary": "Returns offer category information for specified offerId",
+        "description": "# Sample Request\r\nGET /offer/1412/categories\r\n\r\n# Expand Behaviour\r\nUse expand option \"offerproduct\" to return OfferCategoryProducts.",
+        "operationId": "GetOfferCategories",
+        "parameters": [{
+          "name": "offerId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the OfferCategories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferCategoriesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "OfferCategoryId": 0,
+                    "OfferId": 0,
+                    "CategoryName": "string",
+                    "CategoryTitle": "string",
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "QualificationValue": 0,
+                    "SortIndex": 0,
+                    "OfferProducts": [{
+                      "OfferProductId": 0,
+                      "ProductId": 0,
+                      "Product": {
+                        "ProductId": 0,
+                        "ShortCode": "string",
+                        "ProductTypeName": "string",
+                        "ProductType": 1,
+                        "DeliveryDate": "string",
+                        "ProductName": "string",
+                        "ProductBrand": "string",
+                        "ProductSize": "string",
+                        "Available": true,
+                        "Remaining": 0,
+                        "Price": 0,
+                        "PricePerUnit": "string",
+                        "OfferPrice": 0,
+                        "OfferComment": "string",
+                        "OfferId": 0,
+                        "ProductURL": "string",
+                        "ImageName": "string",
+                        "PortraitImageName": "string",
+                        "BoxRecipeId": 0,
+                        "WebComment": "string",
+                        "AverageWeight": 0,
+                        "DefaultFrequencyId": 0,
+                        "FrequencyRestriction": 0,
+                        "FrequencyRestrictionName": "string",
+                        "DayNumber": 0,
+                        "AvailabilityMessage": "string",
+                        "NoOrder": true,
+                        "Rating": 0,
+                        "Reviews": 0,
+                        "NextAvailableDate": "string",
+                        "PreOrder": true,
+                        "InfoTypeId": 0,
+                        "InfoText": "string",
+                        "Descriptions": [{
+                          "TypeId": 0,
+                          "TypeName": "string",
+                          "Description": "string",
+                          "SortIndex": 0
+                        }],
+                        "Dates": [{
+                          "DeliveryDate": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "BoxRecipeId": 0,
+                          "ProductName": "string",
+                          "ImageName": "string",
+                          "DayNumber": 0,
+                          "ProductId": 0
+                        }],
+                        "Media": [{
+                          "EntityMediaId": 0,
+                          "SortOrder": 0,
+                          "MediaType": 1,
+                          "URI": "string",
+                          "MediaTypeName": "string"
+                        }],
+                        "Assets": [{
+                          "AssetType": 1,
+                          "AssetTypeName": "string",
+                          "AssetId": 0,
+                          "AssetName": "string",
+                          "AssetURL": "string",
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        }],
+                        "Frequencies": [{
+                          "Id": 0,
+                          "Name": "string",
+                          "Description": "string"
+                        }],
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No OfferCategories with this OfferId were found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferCategoriesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "OfferCategoryId": 0,
+                    "OfferId": 0,
+                    "CategoryName": "string",
+                    "CategoryTitle": "string",
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "QualificationValue": 0,
+                    "SortIndex": 0,
+                    "OfferProducts": [{
+                      "OfferProductId": 0,
+                      "ProductId": 0,
+                      "Product": {
+                        "ProductId": 0,
+                        "ShortCode": "string",
+                        "ProductTypeName": "string",
+                        "ProductType": 1,
+                        "DeliveryDate": "string",
+                        "ProductName": "string",
+                        "ProductBrand": "string",
+                        "ProductSize": "string",
+                        "Available": true,
+                        "Remaining": 0,
+                        "Price": 0,
+                        "PricePerUnit": "string",
+                        "OfferPrice": 0,
+                        "OfferComment": "string",
+                        "OfferId": 0,
+                        "ProductURL": "string",
+                        "ImageName": "string",
+                        "PortraitImageName": "string",
+                        "BoxRecipeId": 0,
+                        "WebComment": "string",
+                        "AverageWeight": 0,
+                        "DefaultFrequencyId": 0,
+                        "FrequencyRestriction": 0,
+                        "FrequencyRestrictionName": "string",
+                        "DayNumber": 0,
+                        "AvailabilityMessage": "string",
+                        "NoOrder": true,
+                        "Rating": 0,
+                        "Reviews": 0,
+                        "NextAvailableDate": "string",
+                        "PreOrder": true,
+                        "InfoTypeId": 0,
+                        "InfoText": "string",
+                        "Descriptions": [{
+                          "TypeId": 0,
+                          "TypeName": "string",
+                          "Description": "string",
+                          "SortIndex": 0
+                        }],
+                        "Dates": [{
+                          "DeliveryDate": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "BoxRecipeId": 0,
+                          "ProductName": "string",
+                          "ImageName": "string",
+                          "DayNumber": 0,
+                          "ProductId": 0
+                        }],
+                        "Media": [{
+                          "EntityMediaId": 0,
+                          "SortOrder": 0,
+                          "MediaType": 1,
+                          "URI": "string",
+                          "MediaTypeName": "string"
+                        }],
+                        "Assets": [{
+                          "AssetType": 1,
+                          "AssetTypeName": "string",
+                          "AssetId": 0,
+                          "AssetName": "string",
+                          "AssetURL": "string",
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        }],
+                        "Frequencies": [{
+                          "Id": 0,
+                          "Name": "string",
+                          "Description": "string"
+                        }],
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offer/{offerId}/category/{offerCategoryId}": {
+      "get": {
+        "tags": ["Offer"],
+        "summary": "Returns product information for first possible date for specified\r\n                     comma separated list of product ids.",
+        "description": "# Sample Request\r\nGET /offer/983/category/1013\r\n\r\n# Expand Behaviour\r\nUse expand option \"offerproduct\" to return OfferCategoryProducts.\r\n\r\nExpand is not supported on detailed product information for performance reasons.",
+        "operationId": "GetOfferCategory",
+        "parameters": [{
+          "name": "offerId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "offerCategoryId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the OfferCategory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferCategoryResponse"
+                },
+                "example": {
+                  "Result": {
+                    "OfferCategoryId": 0,
+                    "OfferId": 0,
+                    "CategoryName": "string",
+                    "CategoryTitle": "string",
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "QualificationValue": 0,
+                    "SortIndex": 0,
+                    "OfferProducts": [{
+                      "OfferProductId": 0,
+                      "ProductId": 0,
+                      "Product": {
+                        "ProductId": 0,
+                        "ShortCode": "string",
+                        "ProductTypeName": "string",
+                        "ProductType": 1,
+                        "DeliveryDate": "string",
+                        "ProductName": "string",
+                        "ProductBrand": "string",
+                        "ProductSize": "string",
+                        "Available": true,
+                        "Remaining": 0,
+                        "Price": 0,
+                        "PricePerUnit": "string",
+                        "OfferPrice": 0,
+                        "OfferComment": "string",
+                        "OfferId": 0,
+                        "ProductURL": "string",
+                        "ImageName": "string",
+                        "PortraitImageName": "string",
+                        "BoxRecipeId": 0,
+                        "WebComment": "string",
+                        "AverageWeight": 0,
+                        "DefaultFrequencyId": 0,
+                        "FrequencyRestriction": 0,
+                        "FrequencyRestrictionName": "string",
+                        "DayNumber": 0,
+                        "AvailabilityMessage": "string",
+                        "NoOrder": true,
+                        "Rating": 0,
+                        "Reviews": 0,
+                        "NextAvailableDate": "string",
+                        "PreOrder": true,
+                        "InfoTypeId": 0,
+                        "InfoText": "string",
+                        "Descriptions": [{
+                          "TypeId": 0,
+                          "TypeName": "string",
+                          "Description": "string",
+                          "SortIndex": 0
+                        }],
+                        "Dates": [{
+                          "DeliveryDate": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "BoxRecipeId": 0,
+                          "ProductName": "string",
+                          "ImageName": "string",
+                          "DayNumber": 0,
+                          "ProductId": 0
+                        }],
+                        "Media": [{
+                          "EntityMediaId": 0,
+                          "SortOrder": 0,
+                          "MediaType": 1,
+                          "URI": "string",
+                          "MediaTypeName": "string"
+                        }],
+                        "Assets": [{
+                          "AssetType": 1,
+                          "AssetTypeName": "string",
+                          "AssetId": 0,
+                          "AssetName": "string",
+                          "AssetURL": "string",
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        }],
+                        "Frequencies": [{
+                          "Id": 0,
+                          "Name": "string",
+                          "Description": "string"
+                        }],
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No OfferCategory with this id was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferCategoryResponse"
+                },
+                "example": {
+                  "Result": {
+                    "OfferCategoryId": 0,
+                    "OfferId": 0,
+                    "CategoryName": "string",
+                    "CategoryTitle": "string",
+                    "QualificationType": 1,
+                    "QualificationTypeName": "string",
+                    "QualificationValue": 0,
+                    "SortIndex": 0,
+                    "OfferProducts": [{
+                      "OfferProductId": 0,
+                      "ProductId": 0,
+                      "Product": {
+                        "ProductId": 0,
+                        "ShortCode": "string",
+                        "ProductTypeName": "string",
+                        "ProductType": 1,
+                        "DeliveryDate": "string",
+                        "ProductName": "string",
+                        "ProductBrand": "string",
+                        "ProductSize": "string",
+                        "Available": true,
+                        "Remaining": 0,
+                        "Price": 0,
+                        "PricePerUnit": "string",
+                        "OfferPrice": 0,
+                        "OfferComment": "string",
+                        "OfferId": 0,
+                        "ProductURL": "string",
+                        "ImageName": "string",
+                        "PortraitImageName": "string",
+                        "BoxRecipeId": 0,
+                        "WebComment": "string",
+                        "AverageWeight": 0,
+                        "DefaultFrequencyId": 0,
+                        "FrequencyRestriction": 0,
+                        "FrequencyRestrictionName": "string",
+                        "DayNumber": 0,
+                        "AvailabilityMessage": "string",
+                        "NoOrder": true,
+                        "Rating": 0,
+                        "Reviews": 0,
+                        "NextAvailableDate": "string",
+                        "PreOrder": true,
+                        "InfoTypeId": 0,
+                        "InfoText": "string",
+                        "Descriptions": [{
+                          "TypeId": 0,
+                          "TypeName": "string",
+                          "Description": "string",
+                          "SortIndex": 0
+                        }],
+                        "Dates": [{
+                          "DeliveryDate": "string",
+                          "Available": true,
+                          "Remaining": 0,
+                          "Price": 0,
+                          "PricePerUnit": "string",
+                          "OfferPrice": 0,
+                          "OfferComment": "string",
+                          "BoxRecipeId": 0,
+                          "ProductName": "string",
+                          "ImageName": "string",
+                          "DayNumber": 0,
+                          "ProductId": 0
+                        }],
+                        "Media": [{
+                          "EntityMediaId": 0,
+                          "SortOrder": 0,
+                          "MediaType": 1,
+                          "URI": "string",
+                          "MediaTypeName": "string"
+                        }],
+                        "Assets": [{
+                          "AssetType": 1,
+                          "AssetTypeName": "string",
+                          "AssetId": 0,
+                          "AssetName": "string",
+                          "AssetURL": "string",
+                          "Links": [{
+                            "Href": "string",
+                            "Rel": "string",
+                            "Method": "string"
+                          }]
+                        }],
+                        "Frequencies": [{
+                          "Id": 0,
+                          "Name": "string",
+                          "Description": "string"
+                        }],
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      },
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offer/{offerId}/category/{offerCategoryId}/products": {
+      "get": {
+        "tags": ["Offer"],
+        "summary": "Returns OfferCategoryProducts for OfferCategoryId",
+        "description": "# Sample Request\r\nGET /offer/983/category/1013/products\r\n\r\n# Expand Behaviour\r\nUse expand option \"products\" to return Products.",
+        "operationId": "GetOfferCategoryProducts",
+        "parameters": [{
+          "name": "offerId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "offerCategoryId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the OfferCategoryProducts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferProductsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "OfferProductId": 0,
+                    "ProductId": 0,
+                    "Product": {
+                      "ProductId": 0,
+                      "ShortCode": "string",
+                      "ProductTypeName": "string",
+                      "ProductType": 1,
+                      "DeliveryDate": "string",
+                      "ProductName": "string",
+                      "ProductBrand": "string",
+                      "ProductSize": "string",
+                      "Available": true,
+                      "Remaining": 0,
+                      "Price": 0,
+                      "PricePerUnit": "string",
+                      "OfferPrice": 0,
+                      "OfferComment": "string",
+                      "OfferId": 0,
+                      "ProductURL": "string",
+                      "ImageName": "string",
+                      "PortraitImageName": "string",
+                      "BoxRecipeId": 0,
+                      "WebComment": "string",
+                      "AverageWeight": 0,
+                      "DefaultFrequencyId": 0,
+                      "FrequencyRestriction": 0,
+                      "FrequencyRestrictionName": "string",
+                      "DayNumber": 0,
+                      "AvailabilityMessage": "string",
+                      "NoOrder": true,
+                      "Rating": 0,
+                      "Reviews": 0,
+                      "NextAvailableDate": "string",
+                      "PreOrder": true,
+                      "InfoTypeId": 0,
+                      "InfoText": "string",
+                      "Descriptions": [{
+                        "TypeId": 0,
+                        "TypeName": "string",
+                        "Description": "string",
+                        "SortIndex": 0
+                      }],
+                      "Dates": [{
+                        "DeliveryDate": "string",
+                        "Available": true,
+                        "Remaining": 0,
+                        "Price": 0,
+                        "PricePerUnit": "string",
+                        "OfferPrice": 0,
+                        "OfferComment": "string",
+                        "BoxRecipeId": 0,
+                        "ProductName": "string",
+                        "ImageName": "string",
+                        "DayNumber": 0,
+                        "ProductId": 0
+                      }],
+                      "Media": [{
+                        "EntityMediaId": 0,
+                        "SortOrder": 0,
+                        "MediaType": 1,
+                        "URI": "string",
+                        "MediaTypeName": "string"
+                      }],
+                      "Assets": [{
+                        "AssetType": 1,
+                        "AssetTypeName": "string",
+                        "AssetId": 0,
+                        "AssetName": "string",
+                        "AssetURL": "string",
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      }],
+                      "Frequencies": [{
+                        "Id": 0,
+                        "Name": "string",
+                        "Description": "string"
+                      }],
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No OfferCategoryProducts with the OfferCateogoryId was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferProductsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "OfferProductId": 0,
+                    "ProductId": 0,
+                    "Product": {
+                      "ProductId": 0,
+                      "ShortCode": "string",
+                      "ProductTypeName": "string",
+                      "ProductType": 1,
+                      "DeliveryDate": "string",
+                      "ProductName": "string",
+                      "ProductBrand": "string",
+                      "ProductSize": "string",
+                      "Available": true,
+                      "Remaining": 0,
+                      "Price": 0,
+                      "PricePerUnit": "string",
+                      "OfferPrice": 0,
+                      "OfferComment": "string",
+                      "OfferId": 0,
+                      "ProductURL": "string",
+                      "ImageName": "string",
+                      "PortraitImageName": "string",
+                      "BoxRecipeId": 0,
+                      "WebComment": "string",
+                      "AverageWeight": 0,
+                      "DefaultFrequencyId": 0,
+                      "FrequencyRestriction": 0,
+                      "FrequencyRestrictionName": "string",
+                      "DayNumber": 0,
+                      "AvailabilityMessage": "string",
+                      "NoOrder": true,
+                      "Rating": 0,
+                      "Reviews": 0,
+                      "NextAvailableDate": "string",
+                      "PreOrder": true,
+                      "InfoTypeId": 0,
+                      "InfoText": "string",
+                      "Descriptions": [{
+                        "TypeId": 0,
+                        "TypeName": "string",
+                        "Description": "string",
+                        "SortIndex": 0
+                      }],
+                      "Dates": [{
+                        "DeliveryDate": "string",
+                        "Available": true,
+                        "Remaining": 0,
+                        "Price": 0,
+                        "PricePerUnit": "string",
+                        "OfferPrice": 0,
+                        "OfferComment": "string",
+                        "BoxRecipeId": 0,
+                        "ProductName": "string",
+                        "ImageName": "string",
+                        "DayNumber": 0,
+                        "ProductId": 0
+                      }],
+                      "Media": [{
+                        "EntityMediaId": 0,
+                        "SortOrder": 0,
+                        "MediaType": 1,
+                        "URI": "string",
+                        "MediaTypeName": "string"
+                      }],
+                      "Assets": [{
+                        "AssetType": 1,
+                        "AssetTypeName": "string",
+                        "AssetId": 0,
+                        "AssetName": "string",
+                        "AssetURL": "string",
+                        "Links": [{
+                          "Href": "string",
+                          "Rel": "string",
+                          "Method": "string"
+                        }]
+                      }],
+                      "Frequencies": [{
+                        "Id": 0,
+                        "Name": "string",
+                        "Description": "string"
+                      }],
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    },
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns product information for first possible date.",
+        "description": "Sample Request:\r\n\r\n    GET /product/{productId:int}\r\n    \r\nExpand behaviour:\r\n\r\n    Include the Expand Operator in the query string to add additional fields to the Product object returned.\r\n    \r\n    Example:\r\n    \r\n    GET /product/{productId:int}?expand=dates,frequencies \r\n    \r\n    Product object returned will be populated with arrays of dates and frequencies which saves a second request being made to the other endpoints.",
+        "operationId": "GetProduct",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                },
+                "example": {
+                  "Result": {
+                    "ProductId": 0,
+                    "ShortCode": "string",
+                    "ProductTypeName": "string",
+                    "ProductType": 1,
+                    "DeliveryDate": "string",
+                    "ProductName": "string",
+                    "ProductBrand": "string",
+                    "ProductSize": "string",
+                    "Available": true,
+                    "Remaining": 0,
+                    "Price": 0,
+                    "PricePerUnit": "string",
+                    "OfferPrice": 0,
+                    "OfferComment": "string",
+                    "OfferId": 0,
+                    "ProductURL": "string",
+                    "ImageName": "string",
+                    "PortraitImageName": "string",
+                    "BoxRecipeId": 0,
+                    "WebComment": "string",
+                    "AverageWeight": 0,
+                    "DefaultFrequencyId": 0,
+                    "FrequencyRestriction": 0,
+                    "FrequencyRestrictionName": "string",
+                    "DayNumber": 0,
+                    "AvailabilityMessage": "string",
+                    "NoOrder": true,
+                    "Rating": 0,
+                    "Reviews": 0,
+                    "NextAvailableDate": "string",
+                    "PreOrder": true,
+                    "InfoTypeId": 0,
+                    "InfoText": "string",
+                    "Descriptions": [{
+                      "TypeId": 0,
+                      "TypeName": "string",
+                      "Description": "string",
+                      "SortIndex": 0
+                    }],
+                    "Dates": [{
+                      "DeliveryDate": "string",
+                      "Available": true,
+                      "Remaining": 0,
+                      "Price": 0,
+                      "PricePerUnit": "string",
+                      "OfferPrice": 0,
+                      "OfferComment": "string",
+                      "BoxRecipeId": 0,
+                      "ProductName": "string",
+                      "ImageName": "string",
+                      "DayNumber": 0,
+                      "ProductId": 0
+                    }],
+                    "Media": [{
+                      "EntityMediaId": 0,
+                      "SortOrder": 0,
+                      "MediaType": 1,
+                      "URI": "string",
+                      "MediaTypeName": "string"
+                    }],
+                    "Assets": [{
+                      "AssetType": 1,
+                      "AssetTypeName": "string",
+                      "AssetId": 0,
+                      "AssetName": "string",
+                      "AssetURL": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Frequencies": [{
+                      "Id": 0,
+                      "Name": "string",
+                      "Description": "string"
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid or item id not specified"
+          },
+          "401": {
+            "description": "Forbidden, you are not authorised to access this endpoint"
+          },
+          "404": {
+            "description": "Product with this Id was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                },
+                "example": {
+                  "Result": {
+                    "ProductId": 0,
+                    "ShortCode": "string",
+                    "ProductTypeName": "string",
+                    "ProductType": 1,
+                    "DeliveryDate": "string",
+                    "ProductName": "string",
+                    "ProductBrand": "string",
+                    "ProductSize": "string",
+                    "Available": true,
+                    "Remaining": 0,
+                    "Price": 0,
+                    "PricePerUnit": "string",
+                    "OfferPrice": 0,
+                    "OfferComment": "string",
+                    "OfferId": 0,
+                    "ProductURL": "string",
+                    "ImageName": "string",
+                    "PortraitImageName": "string",
+                    "BoxRecipeId": 0,
+                    "WebComment": "string",
+                    "AverageWeight": 0,
+                    "DefaultFrequencyId": 0,
+                    "FrequencyRestriction": 0,
+                    "FrequencyRestrictionName": "string",
+                    "DayNumber": 0,
+                    "AvailabilityMessage": "string",
+                    "NoOrder": true,
+                    "Rating": 0,
+                    "Reviews": 0,
+                    "NextAvailableDate": "string",
+                    "PreOrder": true,
+                    "InfoTypeId": 0,
+                    "InfoText": "string",
+                    "Descriptions": [{
+                      "TypeId": 0,
+                      "TypeName": "string",
+                      "Description": "string",
+                      "SortIndex": 0
+                    }],
+                    "Dates": [{
+                      "DeliveryDate": "string",
+                      "Available": true,
+                      "Remaining": 0,
+                      "Price": 0,
+                      "PricePerUnit": "string",
+                      "OfferPrice": 0,
+                      "OfferComment": "string",
+                      "BoxRecipeId": 0,
+                      "ProductName": "string",
+                      "ImageName": "string",
+                      "DayNumber": 0,
+                      "ProductId": 0
+                    }],
+                    "Media": [{
+                      "EntityMediaId": 0,
+                      "SortOrder": 0,
+                      "MediaType": 1,
+                      "URI": "string",
+                      "MediaTypeName": "string"
+                    }],
+                    "Assets": [{
+                      "AssetType": 1,
+                      "AssetTypeName": "string",
+                      "AssetId": 0,
+                      "AssetName": "string",
+                      "AssetURL": "string",
+                      "Links": [{
+                        "Href": "string",
+                        "Rel": "string",
+                        "Method": "string"
+                      }]
+                    }],
+                    "Frequencies": [{
+                      "Id": 0,
+                      "Name": "string",
+                      "Description": "string"
+                    }],
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  },
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/dates": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns dates for specified product.",
+        "description": "Returns dates for specified product.",
+        "operationId": "GetDatesForProduct",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDatesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DeliveryDate": "string",
+                    "Available": true,
+                    "Remaining": 0,
+                    "Price": 0,
+                    "PricePerUnit": "string",
+                    "OfferPrice": 0,
+                    "OfferComment": "string",
+                    "BoxRecipeId": 0,
+                    "ProductName": "string",
+                    "ImageName": "string",
+                    "DayNumber": 0,
+                    "ProductId": 0
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDatesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "DeliveryDate": "string",
+                    "Available": true,
+                    "Remaining": 0,
+                    "Price": 0,
+                    "PricePerUnit": "string",
+                    "OfferPrice": 0,
+                    "OfferComment": "string",
+                    "BoxRecipeId": 0,
+                    "ProductName": "string",
+                    "ImageName": "string",
+                    "DayNumber": 0,
+                    "ProductId": 0
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/descriptions": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns descriptions for specified product.",
+        "description": "Returns descriptions for specified product.",
+        "operationId": "GetDescriptions",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDescriptionsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "TypeId": 0,
+                    "TypeName": "string",
+                    "Description": "string",
+                    "SortIndex": 0
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDescriptionsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "TypeId": 0,
+                    "TypeName": "string",
+                    "Description": "string",
+                    "SortIndex": 0
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/frequencies": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns Valid frequencies for product.",
+        "description": "Returns Valid frequencies for product.",
+        "operationId": "GetFrequenciesForProduct",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFrequenciesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "Id": 0,
+                    "Name": "string",
+                    "Description": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFrequenciesResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "Id": 0,
+                    "Name": "string",
+                    "Description": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/assets": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns Assets for product.",
+        "description": "Returns Assets for product.",
+        "operationId": "GetAssetsForProduct",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAssetsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "AssetType": 1,
+                    "AssetTypeName": "string",
+                    "AssetId": 0,
+                    "AssetName": "string",
+                    "AssetURL": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAssetsResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "AssetType": 1,
+                    "AssetTypeName": "string",
+                    "AssetId": 0,
+                    "AssetName": "string",
+                    "AssetURL": "string",
+                    "Links": [{
+                      "Href": "string",
+                      "Rel": "string",
+                      "Method": "string"
+                    }]
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{productId}/media": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns Media for product.",
+        "operationId": "GetMediaForProduct",
+        "parameters": [{
+          "name": "productId",
+          "in": "path",
+          "description": "Format - int32.",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the media for the requested product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductMediaResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "EntityMediaId": 0,
+                    "SortOrder": 0,
+                    "MediaType": 1,
+                    "URI": "string",
+                    "MediaTypeName": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid or item id not specified"
+          },
+          "401": {
+            "description": "Forbidden, you are not authorised to access this endpoint"
+          },
+          "404": {
+            "description": "No product with these ids were found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductMediaResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "EntityMediaId": 0,
+                    "SortOrder": 0,
+                    "MediaType": 1,
+                    "URI": "string",
+                    "MediaTypeName": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/frequencies": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns all frequencies.",
+        "description": "Returns all frequencies.",
+        "operationId": "GetFreqencies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFrequencyResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "Id": 0,
+                    "Name": "string",
+                    "Description": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFrequencyResponse"
+                },
+                "example": {
+                  "Result": [{
+                    "Id": 0,
+                    "Name": "string",
+                    "Description": "string"
+                  }],
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "Returns product information for first possible date for specified\r\n                     comma separated list of product ids provided in the body of the GET.",
+        "description": "# Sample Request\r\nGET /products\r\n\r\nBODY (NOTE: We know this is a REST no-no, however our path restriction makes it necessary)\r\n\r\n    {\r\n        \"Ids\": [646,416,76,1483,446,230,210,447,599,1082,3515,871]\r\n    }\r\n# Expand Behaviour\r\nUse expand option \"filters\" to return filters (Featured/Lifestyle/Producer) for products.\r\n\r\nUse expand option \"assets\" to return assets (Icons/Stickers etc) for products.\r\n\r\nExpand is not supported on detailed product information for performance reasons.",
+        "operationId": "GetProductsFromPost",
+        "parameters": [{
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductIdList"
+              },
+              "example": {
+                "Ids": [0]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductIdList"
+              },
+              "example": {
+                "Ids": [0]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductIdList"
+              },
+              "example": {
+                "Ids": [0]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductIdList"
+              },
+              "example": {
+                "Ids": [0]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the Products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid or item id not specified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCollectionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No products with these ids were found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCollectionResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Product"],
+        "summary": "Returns product information for first possible date for specified\r\n                     comma separated list of product ids.",
+        "description": "# Sample Request\r\nGET /products?productIds=76,6524,420,230\r\n\r\n# Expand Behaviour\r\nUse expand option \"filters\" to return filters (Featured/Lifestyle/Producer) for products.\r\n\r\nUse expand option \"assets\" to return assets (Icons/Stickers etc) for products.\r\n\r\nExpand is not supported on detailed product information for performance reasons.",
+        "operationId": "GetProducts",
+        "parameters": [{
+          "name": "productIds",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "deliveryDate",
+          "in": "query",
+          "description": "Format - date-time (as date-time in RFC3339).",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }, {
+          "name": "expand",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the Products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid or item id not specified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCollectionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Forbidden, you are not authorised to access this endpoint"
+          },
+          "404": {
+            "description": "No products with these ids were found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCollectionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Queries a content provider for content",
+        "description": "Queries a content provider for content",
+        "operationId": "GetContent",
+        "parameters": [{
+          "name": "url",
+          "in": "query",
+          "description": "This is the key for the content we want to retrieve from a content provider",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentResultResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid, a url must be provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentResultResponse"
+                },
+                "example": {
+                  "Result": {},
+                  "Success": true,
+                  "StatusCode": 100,
+                  "Errors": [{
+                    "ErrorCode": "string",
+                    "ErrorCodeName": "string",
+                    "ErrorMessage": "string",
+                    "ErrorObject": {}
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/default": {
+      "get": {
+        "summary": "Hompage Default",
+        "description": "Returns menu structure for home page default",
+        "operationId": "default",
+        "responses": {
+          "200": {
+            "description": null
+          }
+        }
+      }
+    },
+    "/home/new": {
+      "get": {
+        "summary": "Hompage New",
+        "description": "Returns menu structure for home page new",
+        "operationId": "new",
+        "responses": {
+          "200": {
+            "description": null
+          }
+        }
+      }
+    },
+    "/home/inspiration": {
+      "get": {
+        "summary": "Hompage Inspiration",
+        "description": "Returns menu structure for home page inspiration",
+        "operationId": "inspiration",
+        "responses": {
+          "200": {
+            "description": null
+          }
+        }
+      }
+    },
+    "/home/carousel": {
+      "get": {
+        "summary": "Hompage Carousel",
+        "description": "Returns menu structure for home page carousel.",
+        "operationId": "carousel",
+        "responses": {
+          "200": {
+            "description": null
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "ErrorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ErrorCodeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ErrorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "ErrorObject": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetType": {
+        "enum": [1, 1314, 1322, 1707],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ContentResultResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntityType": {
+        "enum": [0, 1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Frequency": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FrequencyRestriction": {
+        "enum": [0, 1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "HealthCheckResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HttpStatusCode": {
+        "enum": [100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 421, 422, 423, 424, 426, 428, 429, 431, 451, 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511],
+        "type": "integer",
+        "format": "int32"
+      },
+      "IndexResult": {
+        "type": "object",
+        "properties": {
+          "EntityType": {
+            "$ref": "#/components/schemas/EntityType"
+          },
+          "EntityTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "EntityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Filters": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndexResultResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/IndexResult"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "Href": {
+            "type": "string",
+            "nullable": true
+          },
+          "Rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MediaType": {
+        "enum": [1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Menu": {
+        "type": "object",
+        "properties": {
+          "MenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "MenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "MenuType": {
+            "$ref": "#/components/schemas/MenuType"
+          },
+          "MenuTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "MenuItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MenuItem"
+            },
+            "nullable": true
+          },
+          "FilterMenus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Menu"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenuItem": {
+        "type": "object",
+        "properties": {
+          "MenuItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "MenuItemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "MenuItemDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "ParentMenuItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ProductCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ShowOffers": {
+            "type": "boolean"
+          },
+          "ContentOnly": {
+            "type": "boolean"
+          },
+          "ContentUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "Content": {
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "CategoryContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "FriendlyUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "FriendlyUrlPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsVisibleInMainMenu": {
+            "type": "boolean"
+          },
+          "Level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SubMenuItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MenuItem"
+            },
+            "nullable": true
+          },
+          "Breadcrumbs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MenuItem"
+            },
+            "nullable": true
+          },
+          "Products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MenuItemProduct"
+            },
+            "nullable": true
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Menu"
+            },
+            "nullable": true
+          },
+          "CanonicalURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "MetaDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "PageTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenuItemProduct": {
+        "type": "object",
+        "properties": {
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SortIndex": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "SalesIndex": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenuItemResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/MenuItem"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenuResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/Menu"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenuType": {
+        "enum": [1, 2, 3, 4, 6],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Offer": {
+        "type": "object",
+        "properties": {
+          "OfferId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OfferDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfferStrapline": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "FriendlyURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "StickerURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "ValidFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ValidTo": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "NumberOfCategories": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OfferCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OfferCategory"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferCategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OfferCategory"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferCategory": {
+        "type": "object",
+        "properties": {
+          "OfferCategoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OfferId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CategoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "CategoryTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "QualificationType": {
+            "$ref": "#/components/schemas/QualificationType"
+          },
+          "QualificationTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "QualificationValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "SortIndex": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "OfferProducts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OfferProduct"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferCategoryResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/OfferCategory"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferProduct": {
+        "type": "object",
+        "properties": {
+          "OfferProductId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferProductsResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OfferProduct"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfferResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/Offer"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OffersResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Offer"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ShortCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProductTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ProductType": {
+            "$ref": "#/components/schemas/ProductType"
+          },
+          "DeliveryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ProductName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProductBrand": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProductSize": {
+            "type": "string",
+            "nullable": true
+          },
+          "Available": {
+            "type": "boolean"
+          },
+          "Remaining": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Price": {
+            "type": "number",
+            "format": "double"
+          },
+          "PricePerUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfferPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "OfferComment": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfferId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ProductURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PortraitImageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "BoxRecipeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "WebComment": {
+            "type": "string",
+            "nullable": true
+          },
+          "AverageWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DefaultFrequencyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "FrequencyRestriction": {
+            "$ref": "#/components/schemas/FrequencyRestriction"
+          },
+          "FrequencyRestrictionName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "DayNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "AvailabilityMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "NoOrder": {
+            "type": "boolean"
+          },
+          "Rating": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Reviews": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "NextAvailableDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PreOrder": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "InfoTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "InfoText": {
+            "type": "string",
+            "nullable": true
+          },
+          "Descriptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDescription"
+            },
+            "nullable": true
+          },
+          "Dates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDate"
+            },
+            "nullable": true
+          },
+          "Media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductMedia"
+            },
+            "nullable": true
+          },
+          "Assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductAsset"
+            },
+            "nullable": true
+          },
+          "Frequencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Frequency"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductAsset": {
+        "type": "object",
+        "properties": {
+          "AssetType": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "AssetTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "AssetId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "AssetName": {
+            "type": "string",
+            "nullable": true
+          },
+          "AssetURL": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductAssetsResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductAsset"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCollection": {
+        "type": "object",
+        "properties": {
+          "ProductIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "Products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "nullable": true
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Menu"
+            },
+            "nullable": true
+          },
+          "Links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCollectionResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/ProductCollection"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductDate": {
+        "type": "object",
+        "properties": {
+          "DeliveryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Available": {
+            "type": "boolean"
+          },
+          "Remaining": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "PricePerUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfferPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "OfferComment": {
+            "type": "string",
+            "nullable": true
+          },
+          "BoxRecipeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ProductName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "DayNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ProductId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductDatesResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDate"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductDescription": {
+        "type": "object",
+        "properties": {
+          "TypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TypeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "SortIndex": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductDescriptionsResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDescription"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductFrequenciesResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Frequency"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductFrequencyResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Frequency"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductIdList": {
+        "type": "object",
+        "properties": {
+          "Ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductMedia": {
+        "type": "object",
+        "properties": {
+          "EntityMediaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SortOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "MediaType": {
+            "$ref": "#/components/schemas/MediaType"
+          },
+          "URI": {
+            "type": "string",
+            "nullable": true
+          },
+          "MediaTypeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductMediaResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductMedia"
+            },
+            "nullable": true
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductResponse": {
+        "type": "object",
+        "properties": {
+          "Result": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductType": {
+        "enum": [1, 2, 3, 4, 5, 6],
+        "type": "integer",
+        "format": "int32"
+      },
+      "QualificationType": {
+        "enum": [1, 2],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "Success": {
+            "type": "boolean"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiError"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      },
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
+      }
+    }
+  },
+  "security": [{
+    "apiKeyHeader": []
+  }, {
+    "apiKeyQuery": []
+  }]
+}
